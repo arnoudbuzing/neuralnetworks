@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    524262,      11394]
-NotebookOptionsPosition[    519367,      11234]
-NotebookOutlinePosition[    519741,      11250]
-CellTagsIndexPosition[    519698,      11247]
+NotebookDataLength[    524443,      11398]
+NotebookOptionsPosition[    519502,      11237]
+NotebookOutlinePosition[    519874,      11253]
+CellTagsIndexPosition[    519831,      11250]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -11229,11 +11229,14 @@ Tpks2bD6rf3sPLuOf39e2S98fW+1J1A+JWPinuyXb+0NrzjEOj17bb+179wm
     "RangePadding" -> Scaled[0.05]}]], "Output",
  CellChangeTimes->{3.68062538279564*^9, 3.680627655501834*^9}]
 }, Open  ]]
-}, Open  ]]
+}, Closed]],
+
+Cell["Mushrooms \[LongDash] Edible or Poisonous?", "Subsection",
+ CellChangeTimes->{{3.6806287489941254`*^9, 3.680628769146573*^9}}]
 }, Open  ]]
 },
-WindowSize->{1920, 1037},
-WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+WindowSize->{958, 1028},
+WindowMargins->{{-7, Automatic}, {Automatic, 0}},
 Magnification:>1.5 Inherited,
 FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
 StyleDefinitions->"Default.nb"
@@ -11256,37 +11259,37 @@ Cell[887, 29, 259, 7, 45, "Input"],
 Cell[CellGroupData[{
 Cell[1171, 40, 111, 1, 72, "Subsection"],
 Cell[CellGroupData[{
-Cell[1307, 45, 3019, 66, 481, "Input"],
+Cell[1307, 45, 3019, 66, 539, "Input"],
 Cell[4329, 113, 40444, 836, 502, "Output"]
 }, Closed]],
-Cell[44788, 952, 341, 8, 45, "Input"],
+Cell[44788, 952, 341, 8, 122, "Input"],
 Cell[CellGroupData[{
-Cell[45154, 964, 839, 18, 162, "Input"],
+Cell[45154, 964, 839, 18, 220, "Input"],
 Cell[45996, 984, 77914, 1605, 839, "Output"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[123947, 2594, 243, 5, 45, "Input"],
+Cell[123947, 2594, 243, 5, 34, "Input"],
 Cell[124193, 2601, 40314, 833, 502, "Output"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[164544, 3439, 395, 9, 45, "Input"],
+Cell[164544, 3439, 395, 9, 64, "Input"],
 Cell[164942, 3450, 156, 2, 45, "Output"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[165135, 3457, 397, 9, 45, "Input"],
+Cell[165135, 3457, 397, 9, 64, "Input"],
 Cell[165535, 3468, 102, 1, 45, "Output"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[165674, 3474, 397, 9, 45, "Input"],
+Cell[165674, 3474, 397, 9, 64, "Input"],
 Cell[166074, 3485, 80, 1, 45, "Output"]
 }, Closed]],
-Cell[166169, 3489, 1521, 38, 307, "Input"],
+Cell[166169, 3489, 1521, 38, 325, "Input"],
 Cell[CellGroupData[{
 Cell[167715, 3531, 413, 7, 45, "Input"],
 Cell[168131, 3540, 6791, 138, 101, "Output"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[174959, 3683, 161, 2, 45, "Input"],
+Cell[174959, 3683, 161, 2, 34, "Input"],
 Cell[175123, 3687, 15784, 413, 481, "Output"]
 }, Closed]]
 }, Closed]],
@@ -11369,9 +11372,9 @@ Cell[CellGroupData[{
 Cell[246755, 5420, 632, 17, 133, "Input"],
 Cell[247390, 5439, 821, 23, 140, "Output"]
 }, Open  ]],
-Cell[248226, 5465, 253, 5, 45, "Text"],
+Cell[248226, 5465, 253, 5, 74, "Text"],
 Cell[CellGroupData[{
-Cell[248504, 5474, 2745, 53, 452, "Input"],
+Cell[248504, 5474, 2745, 53, 510, "Input"],
 Cell[251252, 5529, 45319, 942, 694, "Output"]
 }, Open  ]],
 Cell[296586, 6474, 131, 1, 45, "Text"],
@@ -11383,10 +11386,10 @@ Cell[342176, 7428, 192, 4, 45, "Text"],
 Cell[342371, 7434, 1064, 23, 249, "Input"],
 Cell[CellGroupData[{
 Cell[343460, 7461, 100, 1, 45, "Input"],
-Cell[343563, 7464, 728, 13, 48, "Output"]
+Cell[343563, 7464, 728, 13, 80, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[344328, 7482, 1239, 29, 133, "Input"],
+Cell[344328, 7482, 1239, 29, 191, "Input"],
 Cell[345570, 7513, 146257, 3000, 873, "Output"]
 }, Open  ]],
 Cell[491842, 10516, 405, 8, 45, "Input"],
@@ -11394,7 +11397,8 @@ Cell[CellGroupData[{
 Cell[492272, 10528, 151, 2, 45, "Input"],
 Cell[492426, 10532, 26901, 697, 770, "Output"]
 }, Open  ]]
-}, Open  ]]
+}, Closed]],
+Cell[519354, 11233, 132, 1, 58, "Subsection"]
 }, Open  ]]
 }
 ]
