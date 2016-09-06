@@ -1,0 +1,2597 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    111271,       2589]
+NotebookOptionsPosition[    109632,       2530]
+NotebookOutlinePosition[    109981,       2545]
+CellTagsIndexPosition[    109938,       2542]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Text Learning", "Title",
+ CellChangeTimes->{{3.6821652816175656`*^9, 3.6821652843201694`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"labels", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<AliceInWonderland\>\"", ",", "\"\<BeowulfModern\>\"", ",", 
+     "\"\<DonQuixoteIEnglish\>\"", ",", "\"\<Hamlet\>\"", ",", 
+     "\"\<OriginOfSpecies\>\""}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{3.682165287928841*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"texts", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\"\<Text\>\"", ",", "#"}], "}"}], "&"}], ",", "labels"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.682162424903341*^9, 3.6821624534023533`*^9}, {
+   3.682162502290951*^9, 3.6821625322263556`*^9}, {3.6821638384257507`*^9, 
+   3.682163856257327*^9}, 3.682165310808774*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rawdata", "=", 
+   RowBox[{"RandomSample", "[", "\[IndentingNewLine]", 
+    RowBox[{"Flatten", "[", "\[IndentingNewLine]", 
+     RowBox[{"Map", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Function", "[", 
+        RowBox[{
+         RowBox[{"{", "text", "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"#", "\[Rule]", 
+             RowBox[{"Last", "[", "text", "]"}]}], "&"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"RandomSample", "[", 
+            RowBox[{
+             RowBox[{"TextSentences", "[", 
+              RowBox[{"DeleteStopwords", "@", 
+               RowBox[{"ExampleData", "[", "text", "]"}]}], "]"}], ",", 
+             "400"}], "]"}]}], "\[IndentingNewLine]", "]"}]}], "]"}], ",", 
+       "\[IndentingNewLine]", "texts"}], "\[IndentingNewLine]", "]"}], "]"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6821625862349215`*^9, 3.682162621378158*^9}, {
+   3.682162691322153*^9, 3.6821627035544677`*^9}, 3.6821627565150642`*^9, {
+   3.68216278666616*^9, 3.6821628765708823`*^9}, {3.682162914458313*^9, 
+   3.682162919522165*^9}, {3.682162956266102*^9, 3.6821629651941576`*^9}, {
+   3.682167026486943*^9, 3.6821670554954996`*^9}, {3.682181168622411*^9, 
+   3.6821812863902717`*^9}, {3.6821818291390686`*^9, 
+   3.6821818420590987`*^9}, {3.6821820171341195`*^9, 
+   3.6821820274772425`*^9}, {3.68218295756866*^9, 3.6821829772013545`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dictionary", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{"Union", "[", 
+      RowBox[{"Flatten", "[", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"TextWords", "[", 
+           RowBox[{"First", "[", "#", "]"}], "]"}], "&"}], ",", "rawdata"}], 
+        "]"}], "]"}], "]"}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"DictionaryLookup", "[", "#", "]"}], "=!=", 
+       RowBox[{"{", "}"}]}], "&"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.682163038985134*^9, 3.6821630882897167`*^9}, {
+  3.6821659136800156`*^9, 3.6821659238728127`*^9}, {3.682176764421698*^9, 
+  3.6821767784934206`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "dictionary", "]"}]], "Input",
+ CellChangeTimes->{{3.682176807451462*^9, 3.6821768099261293`*^9}}],
+
+Cell[BoxData["6394"], "Output",
+ CellChangeTimes->{3.6821768102206097`*^9, 3.682180203944724*^9, 
+  3.682181397275338*^9, 3.6821818532028637`*^9, 3.6821820396196337`*^9, 
+  3.682182990692339*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TextEncoder", "[", "string_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"vector", ",", "positions"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"vector", "=", 
+      RowBox[{"ConstantArray", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"Length", "[", "dictionary", "]"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"positions", "=", 
+      RowBox[{"Flatten", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Position", "[", 
+          RowBox[{"dictionary", ",", "#"}], "]"}], "&"}], "/@", 
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"TextWords", "[", "string", "]"}], ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"DictionaryLookup", "[", "#", "]"}], "=!=", 
+            RowBox[{"{", "}"}]}], "&"}]}], "]"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"vector", "[", 
+       RowBox[{"[", "positions", "]"}], "]"}], "=", "1"}], ";", 
+     "\[IndentingNewLine]", "vector"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.682163010505853*^9, 3.6821630300497384`*^9}, {
+   3.68216327088943*^9, 3.682163361257512*^9}, {3.682165976800008*^9, 
+   3.6821659827197247`*^9}, 3.6821768266382065`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"TextEncoder", "[", 
+        RowBox[{"First", "[", "#", "]"}], "]"}], "\[Rule]", 
+       RowBox[{"Last", "[", "#", "]"}]}], "&"}], ",", "rawdata"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.682170724781397*^9, 3.6821707379464307`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "data", "]"}]], "Input",
+ CellChangeTimes->{{3.6821818629693117`*^9, 3.6821818644278383`*^9}}],
+
+Cell[BoxData["2000"], "Output",
+ CellChangeTimes->{3.6821818647462425`*^9, 3.6821820725672426`*^9, 
+  3.6821830051474485`*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"training", "=", 
+   RowBox[{"data", "[", 
+    RowBox[{"[", 
+     RowBox[{";;", "1800"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"validation", "=", 
+   RowBox[{"data", "[", 
+    RowBox[{"[", 
+     RowBox[{"1801", ";;"}], "]"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.682162972680451*^9, 3.682162998185917*^9}, {
+  3.682170668614916*^9, 3.6821706725326805`*^9}, {3.6821711609428563`*^9, 
+  3.6821711669454594`*^9}, {3.682181868540289*^9, 3.682181871436621*^9}, {
+  3.6821820815275373`*^9, 3.682182086383608*^9}, {3.6821830089305124`*^9, 
+  3.6821830121623173`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"net", "=", 
+  RowBox[{"NetChain", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1000", ",", "Ramp", ",", "5", ",", "Ramp", ",", 
+      RowBox[{"SoftmaxLayer", "[", "]"}]}], "}"}], ",", 
+    RowBox[{"\"\<Input\>\"", "\[Rule]", 
+     RowBox[{"Length", "[", "dictionary", "]"}]}], ",", 
+    RowBox[{"\"\<Output\>\"", "\[Rule]", 
+     RowBox[{"NetDecoder", "[", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Class\>\"", ",", "labels"}], "}"}], "]"}]}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6821633926169405`*^9, 3.682163392809316*^9}, {
+   3.682163595857458*^9, 3.6821636150662622`*^9}, {3.6821636496585627`*^9, 
+   3.682163658032711*^9}, {3.682163773073268*^9, 3.68216380331472*^9}, {
+   3.6821638660016327`*^9, 3.6821638696900473`*^9}, {3.6821643093741093`*^9, 
+   3.682164321304967*^9}, {3.682171258426708*^9, 3.6821712588477693`*^9}, 
+   3.6821777095977416`*^9, {3.682178642837665*^9, 3.6821786451652536`*^9}, {
+   3.68217913298836*^9, 3.6821791376921587`*^9}, {3.6821802165387497`*^9, 
+   3.6821802315387325`*^9}, {3.682181930652769*^9, 3.682181937852124*^9}, {
+   3.6821824650350475`*^9, 3.6821824655304346`*^9}, {3.682183017929411*^9, 
+   3.6821830183452454`*^9}}],
+
+Cell[BoxData[
+ StyleBox[
+  TagBox[
+   TagBox[
+    RowBox[{"NetChain", 
+     RowBox[{"[", 
+      PanelBox[
+       DynamicModuleBox[{NeuralNetworks`NetChain`PackagePrivate`grid$$ = 
+        Grid[{{
+           MouseAppearance[
+            Annotation["", {"Inputs", "Input"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation["Input", {"Inputs", "Input"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"vector", " ", 
+               Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                 Row[{"6394"}, "\[Times]"], "\[VeryThinSpace]", ")"}, 
+                BaseStyle -> GrayLevel[0.5]]}], {"Inputs", "Input"}, "Mouse"],
+             "LinkHand"]}, {
+           MouseAppearance[
+            Annotation[
+             Style["1", 
+              GrayLevel[0.5]], {"Layers", "1"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[DotPlusLayer, {"Layers", "1"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"vector", " ", 
+               Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                 Row[{"1000"}, "\[Times]"], "\[VeryThinSpace]", ")"}, 
+                BaseStyle -> GrayLevel[0.5]]}], {"Layers", "1"}, "Mouse"], 
+            "LinkHand"]}, {
+           MouseAppearance[
+            Annotation[
+             Style["2", 
+              GrayLevel[0.5]], {"Layers", "2"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[ElementwiseLayer, {"Layers", "2"}, "Mouse"], 
+            "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"vector", " ", 
+               Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                 Row[{"1000"}, "\[Times]"], "\[VeryThinSpace]", ")"}, 
+                BaseStyle -> GrayLevel[0.5]]}], {"Layers", "2"}, "Mouse"], 
+            "LinkHand"]}, {
+           MouseAppearance[
+            Annotation[
+             Style["3", 
+              GrayLevel[0.5]], {"Layers", "3"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[DotPlusLayer, {"Layers", "3"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"vector", " ", 
+               Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                 Row[{"5"}, "\[Times]"], "\[VeryThinSpace]", ")"}, BaseStyle -> 
+                GrayLevel[0.5]]}], {"Layers", "3"}, "Mouse"], "LinkHand"]}, {
+           MouseAppearance[
+            Annotation[
+             Style["4", 
+              GrayLevel[0.5]], {"Layers", "4"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[ElementwiseLayer, {"Layers", "4"}, "Mouse"], 
+            "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"vector", " ", 
+               Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                 Row[{"5"}, "\[Times]"], "\[VeryThinSpace]", ")"}, BaseStyle -> 
+                GrayLevel[0.5]]}], {"Layers", "4"}, "Mouse"], "LinkHand"]}, {
+           MouseAppearance[
+            Annotation[
+             Style["5", 
+              GrayLevel[0.5]], {"Layers", "5"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[SoftmaxLayer, {"Layers", "5"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"vector", " ", 
+               Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                 Row[{"5"}, "\[Times]"], "\[VeryThinSpace]", ")"}, BaseStyle -> 
+                GrayLevel[0.5]]}], {"Layers", "5"}, "Mouse"], "LinkHand"]}, {
+           MouseAppearance[
+            Annotation["", {"Outputs", "Output"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation["Output", {"Outputs", "Output"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"decoded", " ", 
+               Row[{"vector", " ", 
+                 Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                   Row[{"5"}, "\[Times]"], "\[VeryThinSpace]", ")"}, 
+                  BaseStyle -> GrayLevel[0.5]]}]}], {"Outputs", "Output"}, 
+             "Mouse"], "LinkHand"]}}, Alignment -> Left, Spacings -> 1.1], 
+        NeuralNetworks`NetChain`PackagePrivate`assoc$$ = Association[
+        "Type" -> "Chain", "Layers" -> 
+         Association[
+          "1" -> Association[
+            "Type" -> "DotPlus", "Arrays" -> 
+             Association[
+              "Weights" -> NeuralNetworks`TensorT[2, {1000, 6394}], "Biases" -> 
+               NeuralNetworks`Nullable[
+                 NeuralNetworks`TensorT[1, {1000}]]], "Parameters" -> 
+             Association["Size" -> 1000, "$InputSize" -> 6394], "Inputs" -> 
+             Association["Input" -> NeuralNetworks`TensorT[1, {6394}]], 
+             "Outputs" -> 
+             Association["Output" -> NeuralNetworks`TensorT[1, {1000}]]], "2" -> 
+           Association[
+            "Type" -> "Elementwise", "Arrays" -> Association[], "Parameters" -> 
+             Association[
+              "Function" -> Ramp, "$Dimensions" -> {1000}, "$Rank" -> 1], 
+             "Inputs" -> 
+             Association["Input" -> NeuralNetworks`TensorT[1, {1000}]], 
+             "Outputs" -> 
+             Association["Output" -> NeuralNetworks`TensorT[1, {1000}]]], "3" -> 
+           Association[
+            "Type" -> "DotPlus", "Arrays" -> 
+             Association[
+              "Weights" -> NeuralNetworks`TensorT[2, {5, 1000}], "Biases" -> 
+               NeuralNetworks`Nullable[
+                 NeuralNetworks`TensorT[1, {5}]]], "Parameters" -> 
+             Association["Size" -> 5, "$InputSize" -> 1000], "Inputs" -> 
+             Association["Input" -> NeuralNetworks`TensorT[1, {1000}]], 
+             "Outputs" -> 
+             Association["Output" -> NeuralNetworks`TensorT[1, {5}]]], "4" -> 
+           Association[
+            "Type" -> "Elementwise", "Arrays" -> Association[], "Parameters" -> 
+             Association[
+              "Function" -> Ramp, "$Dimensions" -> {5}, "$Rank" -> 1], 
+             "Inputs" -> 
+             Association["Input" -> NeuralNetworks`TensorT[1, {5}]], 
+             "Outputs" -> 
+             Association["Output" -> NeuralNetworks`TensorT[1, {5}]]], "5" -> 
+           Association[
+            "Type" -> "Softmax", "Arrays" -> Association[], "Parameters" -> 
+             Association["Size" -> 5], "Inputs" -> 
+             Association["Input" -> NeuralNetworks`TensorT[1, {5}]], 
+             "Outputs" -> 
+             Association["Output" -> NeuralNetworks`TensorT[1, {5}]]]], 
+         "Connections" -> {
+          NetPort["Layers", "1", "Inputs", "Input"] -> 
+           NetPort["Inputs", "Input"], 
+           NetPort["Layers", "2", "Inputs", "Input"] -> 
+           NetPort["Layers", "1", "Outputs", "Output"], 
+           NetPort["Layers", "3", "Inputs", "Input"] -> 
+           NetPort["Layers", "2", "Outputs", "Output"], 
+           NetPort["Layers", "4", "Inputs", "Input"] -> 
+           NetPort["Layers", "3", "Outputs", "Output"], 
+           NetPort["Layers", "5", "Inputs", "Input"] -> 
+           NetPort["Layers", "4", "Outputs", "Output"], 
+           NetPort["Outputs", "Output"] -> 
+           NetPort["Layers", "5", "Outputs", "Output"]}, "Inputs" -> 
+         Association["Input" -> NeuralNetworks`TensorT[1, {6394}]], "Outputs" -> 
+         Association["Output" -> NeuralNetworks`DecodedType[
+             NetDecoder["Class", 
+              Association[
+              "Parameters" -> 
+               Association[
+                "Labels" -> {
+                  "AliceInWonderland", "BeowulfModern", "DonQuixoteIEnglish", 
+                   "Hamlet", "OriginOfSpecies"}, "Dimensions" -> 5], "Input" -> 
+               NeuralNetworks`TensorT[1, {5}]]], 
+             NeuralNetworks`TensorT[1, {5}]]]], 
+        NeuralNetworks`NetChain`PackagePrivate`opart$$, 
+        NeuralNetworks`NetChain`PackagePrivate`part$$, 
+        NeuralNetworks`NetChain`PackagePrivate`selected$$ = Null}, 
+        DynamicBox[ToBoxes[
+          Column[{
+            EventHandler[
+            NeuralNetworks`NetChain`PackagePrivate`grid$$, "MouseClicked" :> 
+             If[
+               ListQ[
+               NeuralNetworks`NetChain`PackagePrivate`part$$ = 
+                MouseAnnotation[]], 
+               If[NeuralNetworks`NetChain`PackagePrivate`opart$$ === 
+                 NeuralNetworks`NetChain`PackagePrivate`part$$, 
+                 NeuralNetworks`NetChain`PackagePrivate`selected$$ = Null; 
+                 NeuralNetworks`NetChain`PackagePrivate`opart$$ = Null, 
+                 NeuralNetworks`NetChain`PackagePrivate`selected$$ = 
+                  Part[NeuralNetworks`NetChain`PackagePrivate`assoc$$, 
+                    Apply[
+                    Sequence, NeuralNetworks`NetChain`PackagePrivate`part$$]]; 
+                 NeuralNetworks`NetChain`PackagePrivate`opart$$ = 
+                  NeuralNetworks`NetChain`PackagePrivate`part$$; Null]; 
+               Null]], 
+            NeuralNetworks`NetChain`PackagePrivate`fmtSelected[
+            NeuralNetworks`NetChain`PackagePrivate`selected$$, 
+             NeuralNetworks`NetChain`PackagePrivate`part$$]}, Spacings -> 1], 
+          StandardForm],
+         ImageSizeCache->{252., {55., 60.}},
+         TrackedSymbols:>{NeuralNetworks`NetChain`PackagePrivate`selected$$}],
+        DynamicModuleValues:>{}],
+       BaselinePosition->Automatic], "]"}]}],
+    False],
+   Deploy],
+  LineBreakWithin->False]], "Output",
+ CellChangeTimes->{
+  3.682163620085662*^9, 3.6821638707325153`*^9, 3.6821643220227547`*^9, 
+   3.682166005359687*^9, 3.682166461809705*^9, 3.6821712606724215`*^9, 
+   3.682172097716253*^9, 3.682177152693533*^9, 3.6821777105734525`*^9, 
+   3.682178107434408*^9, 3.6821786463875923`*^9, 3.6821791389280205`*^9, 
+   3.6821805245535083`*^9, 3.6821817356992197`*^9, 3.682181873505258*^9, {
+   3.68218193174717*^9, 3.682181938739237*^9}, 3.6821820965091705`*^9, 
+   3.6821823092327375`*^9, 3.6821824667326517`*^9, 3.682182684587637*^9, 
+   3.682183018985886*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"net", "=", 
+   RowBox[{"NetInitialize", "[", "net", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6821642982454805`*^9, 3.6821643021054683`*^9}, 
+   3.682181742898059*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NetGraph", "[", "net", "]"}]], "Input",
+ CellChangeTimes->{{3.6821712670840917`*^9, 3.6821712692224965`*^9}}],
+
+Cell[BoxData[
+ StyleBox[
+  TagBox[
+   TagBox[
+    RowBox[{"NetGraph", 
+     RowBox[{"[", 
+      PanelBox[
+       TagBox[
+        DynamicModuleBox[{NeuralNetworks`NetGraph`PackagePrivate`selection$$ =
+          None, NeuralNetworks`NetGraph`PackagePrivate`outIndex$$ = 6, 
+         NeuralNetworks`NetGraph`PackagePrivate`inputs$$ = Association[
+         "Input" -> NeuralNetworks`TensorT[1, {6394}]], 
+         NeuralNetworks`NetGraph`PackagePrivate`outputs$$ = Association[
+         "Output" -> NeuralNetworks`TensorT[1, {5}]], 
+         NeuralNetworks`NetGraph`PackagePrivate`labels$$ = {
+         "1", "2", "3", "4", "5", "Input", "Output"}, 
+         NeuralNetworks`NetGraph`PackagePrivate`vertices$$ = Association[
+         "1" -> Association[
+           "Type" -> "DotPlus", "Arrays" -> 
+            Association[
+             "Weights" -> NeuralNetworks`TensorT[2, {1000, 6394}], "Biases" -> 
+              NeuralNetworks`TensorT[1, {1000}]], "Parameters" -> 
+            Association["Size" -> 1000, "$InputSize" -> 6394], "Inputs" -> 
+            Association["Input" -> NeuralNetworks`TensorT[1, {6394}]], 
+            "Outputs" -> 
+            Association["Output" -> NeuralNetworks`TensorT[1, {1000}]]], "2" -> 
+          Association[
+           "Type" -> "Elementwise", "Arrays" -> Association[], "Parameters" -> 
+            Association[
+             "Function" -> Ramp, "$Dimensions" -> {1000}, "$Rank" -> 1], 
+            "Inputs" -> 
+            Association["Input" -> NeuralNetworks`TensorT[1, {1000}]], 
+            "Outputs" -> 
+            Association["Output" -> NeuralNetworks`TensorT[1, {1000}]]], "3" -> 
+          Association[
+           "Type" -> "DotPlus", "Arrays" -> 
+            Association[
+             "Weights" -> NeuralNetworks`TensorT[2, {5, 1000}], "Biases" -> 
+              NeuralNetworks`TensorT[1, {5}]], "Parameters" -> 
+            Association["Size" -> 5, "$InputSize" -> 1000], "Inputs" -> 
+            Association["Input" -> NeuralNetworks`TensorT[1, {1000}]], 
+            "Outputs" -> 
+            Association["Output" -> NeuralNetworks`TensorT[1, {5}]]], "4" -> 
+          Association[
+           "Type" -> "Elementwise", "Arrays" -> Association[], "Parameters" -> 
+            Association[
+             "Function" -> Ramp, "$Dimensions" -> {5}, "$Rank" -> 1], 
+            "Inputs" -> 
+            Association["Input" -> NeuralNetworks`TensorT[1, {5}]], "Outputs" -> 
+            Association["Output" -> NeuralNetworks`TensorT[1, {5}]]], "5" -> 
+          Association[
+           "Type" -> "Softmax", "Arrays" -> Association[], "Parameters" -> 
+            Association["Size" -> 5], "Inputs" -> 
+            Association["Input" -> NeuralNetworks`TensorT[1, {5}]], "Outputs" -> 
+            Association["Output" -> NeuralNetworks`TensorT[1, {5}]]]], 
+         NeuralNetworks`NetGraph`PackagePrivate`vports$$ = {
+          NetPort["Vertices", "1"], 
+          NetPort["Vertices", "2"], 
+          NetPort["Vertices", "3"], 
+          NetPort["Vertices", "4"], 
+          NetPort["Vertices", "5"], 
+          NetPort["Inputs", "Input"], 
+          NetPort["Outputs", "Output"]}}, 
+         TagBox[GridBox[{
+            {
+             TemplateBox[{TagBox[
+                GraphicsBox[{{
+                   GrayLevel[0.7], {
+                    
+                    LineBox[{{-5., 3.061616997868383*^-16}, {-4., 
+                    2.4492935982947064`*^-16}}], 
+                    
+                    LineBox[{{-4., 2.4492935982947064`*^-16}, {-3., 
+                    1.8369701987210297`*^-16}}], 
+                    
+                    LineBox[{{-3., 1.8369701987210297`*^-16}, {-2., 
+                    1.2246467991473532`*^-16}}], 
+                    
+                    LineBox[{{-2., 1.2246467991473532`*^-16}, {-1., 
+                    6.123233995736766*^-17}}], 
+                    
+                    LineBox[{{-6., 3.6739403974420594`*^-16}, {-5., 
+                    3.061616997868383*^-16}}], 
+                    LineBox[{{-1., 6.123233995736766*^-17}, {0., 0.}}]}}, {
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> False]], {-4.4, 
+                    2.694222958124177*^-16}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736767*^-17}], 
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> False]], {-3.4, 
+                    2.0818995585505003`*^-16}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736767*^-17}], 
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> 
+                    False]], {-2.4000000000000004`, 
+                    1.4695761589768238`*^-16}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736765*^-17}], 
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> False]], {-1.4, 
+                    8.572527594031473*^-17}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736766*^-17}], 
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> False]], {-5.4, 
+                    3.3065463576978537`*^-16}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736762*^-17}], 
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> False]], {-0.4, 
+                    2.4492935982947065`*^-17}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736766*^-17}]}, {
+                   GrayLevel[0], {
+                    AbsolutePointSize[5], {{
+                    GrayLevel[0.35], 
+                    TagBox[
+                    PointBox[{-5., 3.061616997868383*^-16}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 1), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    RGBColor[0.29, 0.29, 0.83], 
+                    TagBox[
+                    PointBox[{-4., 2.4492935982947064`*^-16}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 2), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    GrayLevel[0.35], 
+                    TagBox[
+                    PointBox[{-3., 1.8369701987210297`*^-16}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 3), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    RGBColor[0.29, 0.29, 0.83], 
+                    TagBox[
+                    PointBox[{-2., 1.2246467991473532`*^-16}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 4), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    RGBColor[0.78, 0.64, 0.98], 
+                    TagBox[
+                    PointBox[{-1., 6.123233995736766*^-17}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 5), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    GrayLevel[0.5], 
+                    TagBox[
+                    PointBox[{-6., 3.6739403974420594`*^-16}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 6), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    GrayLevel[0.5], 
+                    TagBox[
+                    PointBox[{0., 0.}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 7), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}}}}, {{
+                    InsetBox[
+                    FormBox["\"1\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-5., 3.061616997868383*^-16}], 
+                    Offset[{0, -5.5}, {-5., 3.061616997868383*^-16}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"2\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-4., 2.4492935982947064`*^-16}], 
+                    Offset[{0, -5.5}, {-4., 2.4492935982947064`*^-16}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"3\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-3., 1.8369701987210297`*^-16}], 
+                    Offset[{0, -5.5}, {-3., 1.8369701987210297`*^-16}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"4\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-2., 1.2246467991473532`*^-16}], 
+                    Offset[{0, -5.5}, {-2., 1.2246467991473532`*^-16}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"5\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-1., 6.123233995736766*^-17}], 
+                    Offset[{0, -5.5}, {-1., 6.123233995736766*^-17}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"Input\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-6., 3.6739403974420594`*^-16}], 
+                    Offset[{0, -5.5}, {-6., 3.6739403974420594`*^-16}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"Output\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {0., 0.}], 
+                    Offset[{0, -5.5}, {0., 0.}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}]}, 
+                   StyleBox[{
+                    InsetBox[
+                    FormBox["\"1000\"", TraditionalForm], 
+                    
+                    Offset[{3.367778697655222*^-16, 5.5}, {-4.4, 
+                    2.694222958124177*^-16}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736767*^-17}], 
+                    InsetBox[
+                    FormBox["\"1000\"", TraditionalForm], 
+                    
+                    Offset[{3.367778697655222*^-16, 5.5}, {-3.4, 
+                    2.0818995585505003`*^-16}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736767*^-17}], 
+                    InsetBox[
+                    FormBox["\"5\"", TraditionalForm], 
+                    
+                    Offset[{3.3677786976552205`*^-16, 
+                    5.5}, {-2.4000000000000004`, 1.4695761589768238`*^-16}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736765*^-17}], 
+                    InsetBox[
+                    FormBox["\"5\"", TraditionalForm], 
+                    
+                    Offset[{3.3677786976552215`*^-16, 5.5}, {-1.4, 
+                    8.572527594031473*^-17}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736766*^-17}], 
+                    InsetBox[
+                    FormBox["\"6394\"", TraditionalForm], 
+                    
+                    Offset[{3.3677786976552195`*^-16, 5.5}, {-5.4, 
+                    3.3065463576978537`*^-16}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736762*^-17}], 
+                    InsetBox[
+                    FormBox["\"5\"", TraditionalForm], 
+                    
+                    Offset[{3.3677786976552215`*^-16, 5.5}, {-0.4, 
+                    2.4492935982947065`*^-17}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736766*^-17}]}, FontColor -> 
+                    GrayLevel[0.5], FontSize -> 8, FontWeight -> "Thin", 
+                    StripOnInput -> False]}, 
+                  
+                  DynamicModuleBox[{
+                   GeneralUtilities`Graphics`PackagePrivate`vpos$930964 = \
+{{-5., 3.061616997868383*^-16}, {-4., 2.4492935982947064`*^-16}, {-3., 
+                    1.8369701987210297`*^-16}, {-2., 
+                    1.2246467991473532`*^-16}, {-1., 
+                    6.123233995736766*^-17}, {-6., 
+                    3.6739403974420594`*^-16}, {0., 0.}}}, 
+                   DynamicBox[
+                    Typeset`ToBoxes[
+                    If[
+                    Not[
+                    IntegerQ[
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$]], {}, {
+                    AbsolutePointSize[10], 
+                    Opacity[0.2, Black], 
+                    Point[
+                    Part[
+                    GeneralUtilities`Graphics`PackagePrivate`vpos$930964, 
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$]]}], 
+                    StandardForm, Graphics], 
+                    TrackedSymbols :> {
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$}], 
+                   DynamicModuleValues :> {}]}, 
+                 ImageSize -> {426., 25.680000000000025`}, AspectRatio -> 
+                 Full, PlotRangePadding -> 0, 
+                 ImagePadding -> {{19.5, 22.5}, {15.5, 10.179999999999998`}}, 
+                 ImageMargins -> {{0, 0}, {15, 15}}, 
+                 BaseStyle -> {TooltipBoxOptions -> {TooltipDelay -> 0.08}}], 
+                
+                EventHandlerTag[{
+                 "MouseClicked" :> (
+                   NeuralNetworks`NetGraph`PackagePrivate`selection$$ = None),
+                   Method -> "Preemptive", PassEventsDown -> Automatic, 
+                  PassEventsUp -> True}]],FormBox[
+                TemplateBox[{
+                  StyleBox["DotPlusLayer", 
+                   GrayLevel[0.35], StripOnInput -> False], 
+                  StyleBox["ElementwiseLayer", 
+                   GrayLevel[0.35], StripOnInput -> False], 
+                  StyleBox["SoftmaxLayer", 
+                   GrayLevel[0.35], StripOnInput -> False]}, "PointLegend", 
+                 DisplayFunction -> (FormBox[
+                   StyleBox[
+                    StyleBox[
+                    PaneBox[
+                    TagBox[
+                    GridBox[{{
+                    TemplateBox[{
+                    GraphicsBox[{{}, {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    GrayLevel[0.35]], {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    GrayLevel[0.35]], 
+                    PointBox[
+                    NCache[{
+                    Scaled[{
+                    Rational[1, 2], 
+                    Rational[1, 2]}]}, {
+                    Scaled[{0.5, 0.5}]}]]}}}, AspectRatio -> Full, 
+                    ImageSize -> {12, 12}, PlotRangePadding -> None, 
+                    ImagePadding -> Automatic, 
+                    BaselinePosition -> (Scaled[0.16666666666666669`] -> 
+                    Baseline)], "\" \"", #}, "RowDefault"], 
+                    TemplateBox[{
+                    GraphicsBox[{{}, {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[0.78, 0.64, 0.98]], {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[0.78, 0.64, 0.98]], 
+                    PointBox[
+                    NCache[{
+                    Scaled[{
+                    Rational[1, 2], 
+                    Rational[1, 2]}]}, {
+                    Scaled[{0.5, 0.5}]}]]}}}, AspectRatio -> Full, 
+                    ImageSize -> {12, 12}, PlotRangePadding -> None, 
+                    ImagePadding -> Automatic, 
+                    BaselinePosition -> (Scaled[0.16666666666666669`] -> 
+                    Baseline)], "\" \"", #3}, "RowDefault"]}, {
+                    TemplateBox[{
+                    GraphicsBox[{{}, {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[0.29, 0.29, 0.83]], {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[0.29, 0.29, 0.83]], 
+                    PointBox[
+                    NCache[{
+                    Scaled[{
+                    Rational[1, 2], 
+                    Rational[1, 2]}]}, {
+                    Scaled[{0.5, 0.5}]}]]}}}, AspectRatio -> Full, 
+                    ImageSize -> {12, 12}, PlotRangePadding -> None, 
+                    ImagePadding -> Automatic, 
+                    BaselinePosition -> (Scaled[0.16666666666666669`] -> 
+                    Baseline)], "\" \"", #2}, "RowDefault"], "\"\""}}, 
+                    GridBoxAlignment -> {
+                    "Columns" -> {{Left}}, "Rows" -> {{Baseline}}}, 
+                    AutoDelete -> False, 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Grid"], Alignment -> Left, AppearanceElements -> None, 
+                    ImageMargins -> {{2, 2}, {2, 2}}, ImageSizeAction -> 
+                    "ResizeToFit"], LineIndent -> 0, StripOnInput -> False], {
+                    FontFamily -> "Arial"}, Background -> Automatic, 
+                    StripOnInput -> False], TraditionalForm]& ), 
+                 InterpretationFunction :> (RowBox[{"PointLegend", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Directive", "[", 
+                    InterpretationBox[
+                    ButtonBox[
+                    TooltipBox[
+                    GraphicsBox[{{
+                    GrayLevel[0], 
+                    RectangleBox[{0, 0}]}, {
+                    GrayLevel[0], 
+                    RectangleBox[{1, -1}]}, {
+                    GrayLevel[0.35], 
+                    RectangleBox[{0, -1}, {2, 1}]}}, AspectRatio -> 1, Frame -> 
+                    True, FrameStyle -> GrayLevel[0.23333333333333334`], 
+                    FrameTicks -> None, PlotRangePadding -> None, ImageSize -> 
+                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                    "GrayLevel[0.35]"], Appearance -> None, BaseStyle -> {}, 
+                    BaselinePosition -> Baseline, DefaultBaseStyle -> {}, 
+                    ButtonFunction :> With[{Typeset`box$ = EvaluationBox[]}, 
+                    If[
+                    Not[
+                    AbsoluteCurrentValue["Deployed"]], 
+                    SelectionMove[Typeset`box$, All, Expression]; 
+                    FrontEnd`Private`$ColorSelectorInitialAlpha = 1; 
+                    FrontEnd`Private`$ColorSelectorInitialColor = 
+                    GrayLevel[0.35]; 
+                    FrontEnd`Private`$ColorSelectorUseMakeBoxes = True; 
+                    MathLink`CallFrontEnd[
+                    FrontEnd`AttachCell[Typeset`box$, 
+                    FrontEndResource["GrayLevelColorValueSelector"], {
+                    0, {Left, Bottom}}, {Left, Top}, 
+                    "ClosingActions" -> {
+                    "SelectionDeparture", "ParentChanged", 
+                    "EvaluatorQuit"}]]]], BaseStyle -> Inherited, Evaluator -> 
+                    Automatic, Method -> "Preemptive"], 
+                    GrayLevel[0.35], Editable -> False, Selectable -> False], 
+                    "]"}], ",", 
+                    RowBox[{"Directive", "[", 
+                    InterpretationBox[
+                    ButtonBox[
+                    TooltipBox[
+                    GraphicsBox[{{
+                    GrayLevel[0], 
+                    RectangleBox[{0, 0}]}, {
+                    GrayLevel[0], 
+                    RectangleBox[{1, -1}]}, {
+                    RGBColor[0.29, 0.29, 0.83], 
+                    RectangleBox[{0, -1}, {2, 1}]}}, AspectRatio -> 1, Frame -> 
+                    True, FrameStyle -> 
+                    RGBColor[0.19333333333333333`, 0.19333333333333333`, 
+                    0.5533333333333333], FrameTicks -> None, PlotRangePadding -> 
+                    None, ImageSize -> 
+                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                    "RGBColor[0.29, 0.29, 0.83]"], Appearance -> None, 
+                    BaseStyle -> {}, BaselinePosition -> Baseline, 
+                    DefaultBaseStyle -> {}, ButtonFunction :> 
+                    With[{Typeset`box$ = EvaluationBox[]}, 
+                    If[
+                    Not[
+                    AbsoluteCurrentValue["Deployed"]], 
+                    SelectionMove[Typeset`box$, All, Expression]; 
+                    FrontEnd`Private`$ColorSelectorInitialAlpha = 1; 
+                    FrontEnd`Private`$ColorSelectorInitialColor = 
+                    RGBColor[0.29, 0.29, 0.83]; 
+                    FrontEnd`Private`$ColorSelectorUseMakeBoxes = True; 
+                    MathLink`CallFrontEnd[
+                    FrontEnd`AttachCell[Typeset`box$, 
+                    FrontEndResource["RGBColorValueSelector"], {
+                    0, {Left, Bottom}}, {Left, Top}, 
+                    "ClosingActions" -> {
+                    "SelectionDeparture", "ParentChanged", 
+                    "EvaluatorQuit"}]]]], BaseStyle -> Inherited, Evaluator -> 
+                    Automatic, Method -> "Preemptive"], 
+                    RGBColor[0.29, 0.29, 0.83], Editable -> False, Selectable -> 
+                    False], "]"}], ",", 
+                    RowBox[{"Directive", "[", 
+                    InterpretationBox[
+                    ButtonBox[
+                    TooltipBox[
+                    GraphicsBox[{{
+                    GrayLevel[0], 
+                    RectangleBox[{0, 0}]}, {
+                    GrayLevel[0], 
+                    RectangleBox[{1, -1}]}, {
+                    RGBColor[0.78, 0.64, 0.98], 
+                    RectangleBox[{0, -1}, {2, 1}]}}, AspectRatio -> 1, Frame -> 
+                    True, FrameStyle -> 
+                    RGBColor[0.52, 0.4266666666666667, 0.6533333333333333], 
+                    FrameTicks -> None, PlotRangePadding -> None, ImageSize -> 
+                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                    "RGBColor[0.78, 0.64, 0.98]"], Appearance -> None, 
+                    BaseStyle -> {}, BaselinePosition -> Baseline, 
+                    DefaultBaseStyle -> {}, ButtonFunction :> 
+                    With[{Typeset`box$ = EvaluationBox[]}, 
+                    If[
+                    Not[
+                    AbsoluteCurrentValue["Deployed"]], 
+                    SelectionMove[Typeset`box$, All, Expression]; 
+                    FrontEnd`Private`$ColorSelectorInitialAlpha = 1; 
+                    FrontEnd`Private`$ColorSelectorInitialColor = 
+                    RGBColor[0.78, 0.64, 0.98]; 
+                    FrontEnd`Private`$ColorSelectorUseMakeBoxes = True; 
+                    MathLink`CallFrontEnd[
+                    FrontEnd`AttachCell[Typeset`box$, 
+                    FrontEndResource["RGBColorValueSelector"], {
+                    0, {Left, Bottom}}, {Left, Top}, 
+                    "ClosingActions" -> {
+                    "SelectionDeparture", "ParentChanged", 
+                    "EvaluatorQuit"}]]]], BaseStyle -> Inherited, Evaluator -> 
+                    Automatic, Method -> "Preemptive"], 
+                    RGBColor[0.78, 0.64, 0.98], Editable -> False, Selectable -> 
+                    False], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2, ",", #3}], "}"}], ",", 
+                    RowBox[{"LegendMarkerSize", "\[Rule]", "12"}], ",", 
+                    RowBox[{"LegendMargins", "\[Rule]", "2"}], ",", 
+                    
+                    RowBox[{
+                    "LegendLayout", "\[Rule]", 
+                    "GeneralUtilities`Graphics`PackagePrivate`legendTable"}]}]\
+, "]"}]& ), Editable -> True], TraditionalForm]},
+              "Legended",
+              DisplayFunction->(GridBox[{{
+                  TagBox[
+                   ItemBox[
+                    PaneBox[
+                    TagBox[#, "SkipImageSizeLevel"], 
+                    Alignment -> {Center, Baseline}, BaselinePosition -> 
+                    Baseline], DefaultBaseStyle -> "Labeled"], 
+                   "SkipImageSizeLevel"]}, {
+                  ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+                GridBoxAlignment -> {
+                 "Columns" -> {{Center}}, "Rows" -> {{Center}}}, AutoDelete -> 
+                False, GridBoxItemSize -> Automatic, 
+                BaselinePosition -> {1, 1}]& ),
+              Editable->True,
+              InterpretationFunction->(RowBox[{"Legended", "[", 
+                 RowBox[{#, ",", 
+                   RowBox[{"Placed", "[", 
+                    RowBox[{#2, ",", "Below"}], "]"}]}], "]"}]& )]},
+            {
+             DynamicBox[ToBoxes[
+               If[
+                IntegerQ[NeuralNetworks`NetGraph`PackagePrivate`selection$$], 
+                Item[
+                 NeuralNetworks`NetGraph`PackagePrivate`vportInfo[
+                  Part[
+                  NeuralNetworks`NetGraph`PackagePrivate`vports$$, 
+                   NeuralNetworks`NetGraph`PackagePrivate`selection$$], 
+                  NeuralNetworks`NetGraph`PackagePrivate`inputs$$, 
+                  NeuralNetworks`NetGraph`PackagePrivate`outputs$$, 
+                  NeuralNetworks`NetGraph`PackagePrivate`vertices$$], 
+                 Alignment -> Center], 
+                Item["", ItemSize -> {0, 0}]], StandardForm],
+              ImageSizeCache->{0., {0., 6.}},
+              
+              TrackedSymbols:>{
+               NeuralNetworks`NetGraph`PackagePrivate`selection$$}]}
+           },
+           AutoDelete->False,
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+          "Grid"],
+         DynamicModuleValues:>{},
+         Initialization:>{NetGraph}],
+        Deploy,
+        DefaultBaseStyle->"Deploy"],
+       BaselinePosition->(Top -> Scaled[3])], "]"}]}],
+    False],
+   Deploy],
+  LineBreakWithin->False]], "Output",
+ CellChangeTimes->{3.682171269606987*^9, 3.6821721015769863`*^9, 
+  3.6821771558423104`*^9, 3.6821777127033854`*^9, 3.682178650899037*^9, 
+  3.682179142513434*^9, 3.6821805247687235`*^9, 3.6821817458764677`*^9, 
+  3.682181875352731*^9, 3.682181940428788*^9, 3.6821821020254016`*^9, 
+  3.682182468411552*^9, 3.6821830211018705`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"net", "=", 
+   RowBox[{"NetInitialize", "[", "net", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"net", "=", 
+  RowBox[{"NetTrain", "[", 
+   RowBox[{"net", ",", "training", ",", 
+    RowBox[{"ValidationSet", "\[Rule]", "validation"}], ",", 
+    RowBox[{"TargetDevice", "\[Rule]", "\"\<GPU\>\""}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{
+  3.682178113607125*^9, {3.6821781619246683`*^9, 3.682178162196597*^9}, {
+   3.682178245780173*^9, 3.6821782513482995`*^9}, {3.6821785260849934`*^9, 
+   3.682178533564048*^9}, {3.682178661852374*^9, 3.682178662036358*^9}, {
+   3.6821818101473207`*^9, 3.6821818114109316`*^9}, 3.6821819453004513`*^9, {
+   3.682182581452099*^9, 3.682182581635728*^9}, {3.682182632941554*^9, 
+   3.682182634108144*^9}}],
+
+Cell[BoxData[
+ StyleBox[
+  TagBox[
+   TagBox[
+    RowBox[{"NetChain", 
+     RowBox[{"[", 
+      PanelBox[
+       DynamicModuleBox[{NeuralNetworks`NetChain`PackagePrivate`grid$$ = 
+        Grid[{{
+           MouseAppearance[
+            Annotation["", {"Inputs", "Input"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation["Input", {"Inputs", "Input"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"vector", " ", 
+               Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                 Row[{"6394"}, "\[Times]"], "\[VeryThinSpace]", ")"}, 
+                BaseStyle -> GrayLevel[0.5]]}], {"Inputs", "Input"}, "Mouse"],
+             "LinkHand"]}, {
+           MouseAppearance[
+            Annotation[
+             Style["1", 
+              GrayLevel[0.5]], {"Layers", "1"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[DotPlusLayer, {"Layers", "1"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"vector", " ", 
+               Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                 Row[{"1000"}, "\[Times]"], "\[VeryThinSpace]", ")"}, 
+                BaseStyle -> GrayLevel[0.5]]}], {"Layers", "1"}, "Mouse"], 
+            "LinkHand"]}, {
+           MouseAppearance[
+            Annotation[
+             Style["2", 
+              GrayLevel[0.5]], {"Layers", "2"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[ElementwiseLayer, {"Layers", "2"}, "Mouse"], 
+            "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"vector", " ", 
+               Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                 Row[{"1000"}, "\[Times]"], "\[VeryThinSpace]", ")"}, 
+                BaseStyle -> GrayLevel[0.5]]}], {"Layers", "2"}, "Mouse"], 
+            "LinkHand"]}, {
+           MouseAppearance[
+            Annotation[
+             Style["3", 
+              GrayLevel[0.5]], {"Layers", "3"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[DotPlusLayer, {"Layers", "3"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"vector", " ", 
+               Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                 Row[{"5"}, "\[Times]"], "\[VeryThinSpace]", ")"}, BaseStyle -> 
+                GrayLevel[0.5]]}], {"Layers", "3"}, "Mouse"], "LinkHand"]}, {
+           MouseAppearance[
+            Annotation[
+             Style["4", 
+              GrayLevel[0.5]], {"Layers", "4"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[ElementwiseLayer, {"Layers", "4"}, "Mouse"], 
+            "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"vector", " ", 
+               Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                 Row[{"5"}, "\[Times]"], "\[VeryThinSpace]", ")"}, BaseStyle -> 
+                GrayLevel[0.5]]}], {"Layers", "4"}, "Mouse"], "LinkHand"]}, {
+           MouseAppearance[
+            Annotation[
+             Style["5", 
+              GrayLevel[0.5]], {"Layers", "5"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[SoftmaxLayer, {"Layers", "5"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"vector", " ", 
+               Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                 Row[{"5"}, "\[Times]"], "\[VeryThinSpace]", ")"}, BaseStyle -> 
+                GrayLevel[0.5]]}], {"Layers", "5"}, "Mouse"], "LinkHand"]}, {
+           MouseAppearance[
+            Annotation["", {"Outputs", "Output"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation["Output", {"Outputs", "Output"}, "Mouse"], "LinkHand"], 
+           MouseAppearance[
+            Annotation[
+             Row[{"decoded", " ", 
+               Row[{"vector", " ", 
+                 Row[{"(", "\[VeryThinSpace]", "size", ":", " ", 
+                   Row[{"5"}, "\[Times]"], "\[VeryThinSpace]", ")"}, 
+                  BaseStyle -> GrayLevel[0.5]]}]}], {"Outputs", "Output"}, 
+             "Mouse"], "LinkHand"]}}, Alignment -> Left, Spacings -> 1.1], 
+        NeuralNetworks`NetChain`PackagePrivate`assoc$$ = Association[
+        "Type" -> "Chain", "Layers" -> 
+         Association[
+          "1" -> Association[
+            "Type" -> "DotPlus", "Arrays" -> 
+             Association[
+              "Weights" -> NeuralNetworks`TensorT[2, {1000, 6394}], "Biases" -> 
+               NeuralNetworks`TensorT[1, {1000}]], "Parameters" -> 
+             Association["Size" -> 1000, "$InputSize" -> 6394], "Inputs" -> 
+             Association["Input" -> NeuralNetworks`TensorT[1, {6394}]], 
+             "Outputs" -> 
+             Association["Output" -> NeuralNetworks`TensorT[1, {1000}]]], "2" -> 
+           Association[
+            "Type" -> "Elementwise", "Arrays" -> Association[], "Parameters" -> 
+             Association[
+              "Function" -> Ramp, "$Dimensions" -> {1000}, "$Rank" -> 1], 
+             "Inputs" -> 
+             Association["Input" -> NeuralNetworks`TensorT[1, {1000}]], 
+             "Outputs" -> 
+             Association["Output" -> NeuralNetworks`TensorT[1, {1000}]]], "3" -> 
+           Association[
+            "Type" -> "DotPlus", "Arrays" -> 
+             Association[
+              "Weights" -> NeuralNetworks`TensorT[2, {5, 1000}], "Biases" -> 
+               NeuralNetworks`TensorT[1, {5}]], "Parameters" -> 
+             Association["Size" -> 5, "$InputSize" -> 1000], "Inputs" -> 
+             Association["Input" -> NeuralNetworks`TensorT[1, {1000}]], 
+             "Outputs" -> 
+             Association["Output" -> NeuralNetworks`TensorT[1, {5}]]], "4" -> 
+           Association[
+            "Type" -> "Elementwise", "Arrays" -> Association[], "Parameters" -> 
+             Association[
+              "Function" -> Ramp, "$Dimensions" -> {5}, "$Rank" -> 1], 
+             "Inputs" -> 
+             Association["Input" -> NeuralNetworks`TensorT[1, {5}]], 
+             "Outputs" -> 
+             Association["Output" -> NeuralNetworks`TensorT[1, {5}]]], "5" -> 
+           Association[
+            "Type" -> "Softmax", "Arrays" -> Association[], "Parameters" -> 
+             Association["Size" -> 5], "Inputs" -> 
+             Association["Input" -> NeuralNetworks`TensorT[1, {5}]], 
+             "Outputs" -> 
+             Association["Output" -> NeuralNetworks`TensorT[1, {5}]]]], 
+         "Connections" -> {
+          NetPort["Layers", "1", "Inputs", "Input"] -> 
+           NetPort["Inputs", "Input"], 
+           NetPort["Layers", "2", "Inputs", "Input"] -> 
+           NetPort["Layers", "1", "Outputs", "Output"], 
+           NetPort["Layers", "3", "Inputs", "Input"] -> 
+           NetPort["Layers", "2", "Outputs", "Output"], 
+           NetPort["Layers", "4", "Inputs", "Input"] -> 
+           NetPort["Layers", "3", "Outputs", "Output"], 
+           NetPort["Layers", "5", "Inputs", "Input"] -> 
+           NetPort["Layers", "4", "Outputs", "Output"], 
+           NetPort["Outputs", "Output"] -> 
+           NetPort["Layers", "5", "Outputs", "Output"]}, "Inputs" -> 
+         Association["Input" -> NeuralNetworks`TensorT[1, {6394}]], "Outputs" -> 
+         Association["Output" -> NeuralNetworks`DecodedType[
+             NetDecoder["Class", 
+              Association[
+              "Parameters" -> 
+               Association[
+                "Labels" -> {
+                  "AliceInWonderland", "BeowulfModern", "DonQuixoteIEnglish", 
+                   "Hamlet", "OriginOfSpecies"}, "Dimensions" -> 5], "Input" -> 
+               NeuralNetworks`TensorT[1, {5}]]], 
+             NeuralNetworks`TensorT[1, {5}]]]], 
+        NeuralNetworks`NetChain`PackagePrivate`opart$$, 
+        NeuralNetworks`NetChain`PackagePrivate`part$$, 
+        NeuralNetworks`NetChain`PackagePrivate`selected$$ = Null}, 
+        DynamicBox[ToBoxes[
+          Column[{
+            EventHandler[
+            NeuralNetworks`NetChain`PackagePrivate`grid$$, "MouseClicked" :> 
+             If[
+               ListQ[
+               NeuralNetworks`NetChain`PackagePrivate`part$$ = 
+                MouseAnnotation[]], 
+               If[NeuralNetworks`NetChain`PackagePrivate`opart$$ === 
+                 NeuralNetworks`NetChain`PackagePrivate`part$$, 
+                 NeuralNetworks`NetChain`PackagePrivate`selected$$ = Null; 
+                 NeuralNetworks`NetChain`PackagePrivate`opart$$ = Null, 
+                 NeuralNetworks`NetChain`PackagePrivate`selected$$ = 
+                  Part[NeuralNetworks`NetChain`PackagePrivate`assoc$$, 
+                    Apply[
+                    Sequence, NeuralNetworks`NetChain`PackagePrivate`part$$]]; 
+                 NeuralNetworks`NetChain`PackagePrivate`opart$$ = 
+                  NeuralNetworks`NetChain`PackagePrivate`part$$; Null]; 
+               Null]], 
+            NeuralNetworks`NetChain`PackagePrivate`fmtSelected[
+            NeuralNetworks`NetChain`PackagePrivate`selected$$, 
+             NeuralNetworks`NetChain`PackagePrivate`part$$]}, Spacings -> 1], 
+          StandardForm],
+         ImageSizeCache->{252., {55., 60.}},
+         TrackedSymbols:>{NeuralNetworks`NetChain`PackagePrivate`selected$$}],
+        DynamicModuleValues:>{}],
+       BaselinePosition->Automatic], "]"}]}],
+    False],
+   Deploy],
+  LineBreakWithin->False]], "Output",
+ CellChangeTimes->{3.6821781223321657`*^9, 3.682178234267651*^9, 
+  3.6821784553034124`*^9, 3.6821786351653833`*^9, 3.682179122902444*^9, 
+  3.6821798204350348`*^9, 3.6821806254662952`*^9, 3.6821819006016397`*^9, 
+  3.6821819977745266`*^9, 3.6821822041406918`*^9, 3.682182567605971*^9, 
+  3.682182626951866*^9, 3.6821826802192307`*^9, 3.6821827336710415`*^9, 
+  3.682183062465681*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Check it", "Subsubsection",
+ CellChangeTimes->{{3.6821719806346903`*^9, 3.682171981378909*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cm", "=", 
+   RowBox[{"ClassifierMeasurements", "[", 
+    RowBox[{"net", ",", "validation"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6821648654946203`*^9, 3.68216487510505*^9}, 
+   3.682164948600814*^9, {3.6821667518634644`*^9, 3.6821667521271477`*^9}, {
+   3.6821719154915524`*^9, 3.6821719172465324`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"cm", "[", "\"\<ConfusionMatrixPlot\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.682164877874139*^9, 3.6821648830572667`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGBghWIQGwI+2FNKn5HOEVjL+85++jptWaf8N/YBqw6EJ3x7
+Zn/p89qQ2Tvf2WdW3z20N/OuvRHXyiZehwT7+vWc3KoR7+yP3dz5Z3nHW3sl
+wfX8gZde2kt2nBM1PfzWPr15ru2d0Nf2Nc6X5udLPcEpDrP/YZXIOveHt+wZ
+UACmO43T5mex67y19xFS41sj9NJ++7Qcpks77+B0j0OLymGT9jf2u2/KN3Y/
+fmC/OkoyVUihDKc5pIZP3oSyvJln39q/21T2doHdfXu11Z3u4gw5OM1J+2Ig
+vbfirb1FBH9cmc0r+1V3Hj+vs3uIUz2u8Cc1fnGFDy71ABrwyyA=
+   "], {{0, 0}, {5, 5}}, {0, 1}],
+  Epilog->{{
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["35", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {0.5, 4.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "35", "\" examples of \"", "\"AliceInWonderland\"", 
+             "\" correctly classified\""}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Precision = \"", "0.9722222222222222`"}, 
+            "RowDefault"]}, {
+           
+           TemplateBox[{"\"Recall = \"", "0.813953488372093`"}, 
+            "RowDefault"]}, {
+           
+           TemplateBox[{"\"FScore = \"", "0.8860759493670886`"}, 
+            "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+         DefaultBaseStyle -> "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          35, " examples of ", "AliceInWonderland", " correctly classified"}], 
+         Row[{"Precision = ", 0.9722222222222222}], 
+         Row[{"Recall = ", 0.813953488372093}], 
+         Row[{"FScore = ", 0.8860759493670886}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["2", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {0.5, 3.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "2", "\" examples of \"", "\"BeowulfModern\"", 
+             "\" misclassified as \"", "\"AliceInWonderland\""}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Row fraction = \"", "0.05`"}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Column fraction = \"", "0.046511627906976744`"}, 
+            "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+         DefaultBaseStyle -> "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          2, " examples of ", "BeowulfModern", " misclassified as ", 
+           "AliceInWonderland"}], 
+         Row[{"Row fraction = ", 0.05}], 
+         Row[{"Column fraction = ", 0.046511627906976744`}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["5", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {0.5, 2.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "5", "\" examples of \"", "\"DonQuixoteIEnglish\"", 
+             "\" misclassified as \"", "\"AliceInWonderland\""}, 
+            "RowDefault"]}, {
+           
+           TemplateBox[{"\"Row fraction = \"", "0.11904761904761904`"}, 
+            "RowDefault"]}, {
+           
+           TemplateBox[{"\"Column fraction = \"", "0.11627906976744186`"}, 
+            "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+         DefaultBaseStyle -> "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          5, " examples of ", "DonQuixoteIEnglish", " misclassified as ", 
+           "AliceInWonderland"}], 
+         Row[{"Row fraction = ", 0.11904761904761904`}], 
+         Row[{"Column fraction = ", 0.11627906976744186`}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["1", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {0.5, 1.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "1", "\" example of \"", "\"Hamlet\"", "\" misclassified as \"", 
+             "\"AliceInWonderland\""}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Row fraction = \"", "0.022222222222222223`"}, 
+            "RowDefault"]}, {
+           
+           TemplateBox[{"\"Column fraction = \"", "0.023255813953488372`"}, 
+            "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+         DefaultBaseStyle -> "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          1, " example of ", "Hamlet", " misclassified as ", 
+           "AliceInWonderland"}], 
+         Row[{"Row fraction = ", 0.022222222222222223`}], 
+         Row[{"Column fraction = ", 0.023255813953488372`}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["0", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {0.5, 0.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "0", "\" example of \"", "\"OriginOfSpecies\"", 
+             "\" misclassified as \"", "\"AliceInWonderland\""}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Row fraction = \"", "0.`"}, "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          0, " example of ", "OriginOfSpecies", " misclassified as ", 
+           "AliceInWonderland"}], 
+         Row[{"Row fraction = ", 0.}], 
+         Row[{"Column fraction = ", 0.}]}], "Tooltip"]& ]}, {
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["0", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {1.5, 4.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "0", "\" example of \"", "\"AliceInWonderland\"", 
+             "\" misclassified as \"", "\"BeowulfModern\""}, "RowDefault"]}, {
+           TemplateBox[{"\"Row fraction = \"", "0.`"}, "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          0, " example of ", "AliceInWonderland", " misclassified as ", 
+           "BeowulfModern"}], 
+         Row[{"Row fraction = ", 0.}], 
+         Row[{"Column fraction = ", 0.}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["34", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {1.5, 3.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "34", "\" examples of \"", "\"BeowulfModern\"", 
+             "\" correctly classified\""}, "RowDefault"]}, {
+           TemplateBox[{"\"Precision = \"", "0.85`"}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Recall = \"", "0.8947368421052632`"}, 
+            "RowDefault"]}, {
+           
+           TemplateBox[{"\"FScore = \"", "0.8717948717948718`"}, 
+            "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+         DefaultBaseStyle -> "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{34, " examples of ", "BeowulfModern", " correctly classified"}], 
+         Row[{"Precision = ", 0.85}], 
+         Row[{"Recall = ", 0.8947368421052632}], 
+         Row[{"FScore = ", 0.8717948717948718}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["1", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {1.5, 2.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "1", "\" example of \"", "\"DonQuixoteIEnglish\"", 
+             "\" misclassified as \"", "\"BeowulfModern\""}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Row fraction = \"", "0.023809523809523808`"}, 
+            "RowDefault"]}, {
+           
+           TemplateBox[{"\"Column fraction = \"", "0.02631578947368421`"}, 
+            "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+         DefaultBaseStyle -> "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          1, " example of ", "DonQuixoteIEnglish", " misclassified as ", 
+           "BeowulfModern"}], 
+         Row[{"Row fraction = ", 0.023809523809523808`}], 
+         Row[{"Column fraction = ", 0.02631578947368421}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["3", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {1.5, 1.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           TemplateBox[{
+            "3", "\" examples of \"", "\"Hamlet\"", "\" misclassified as \"", 
+             "\"BeowulfModern\""}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Row fraction = \"", "0.06666666666666667`"}, 
+            "RowDefault"]}, {
+           
+           TemplateBox[{"\"Column fraction = \"", "0.07894736842105263`"}, 
+            "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+         DefaultBaseStyle -> "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          3, " examples of ", "Hamlet", " misclassified as ", 
+           "BeowulfModern"}], 
+         Row[{"Row fraction = ", 0.06666666666666667}], 
+         Row[{"Column fraction = ", 0.07894736842105263}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["0", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {1.5, 0.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "0", "\" example of \"", "\"OriginOfSpecies\"", 
+             "\" misclassified as \"", "\"BeowulfModern\""}, "RowDefault"]}, {
+           TemplateBox[{"\"Row fraction = \"", "0.`"}, "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          0, " example of ", "OriginOfSpecies", " misclassified as ", 
+           "BeowulfModern"}], 
+         Row[{"Row fraction = ", 0.}], 
+         Row[{"Column fraction = ", 0.}]}], "Tooltip"]& ]}, {
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["0", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {2.5, 4.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "0", "\" example of \"", "\"AliceInWonderland\"", 
+             "\" misclassified as \"", "\"DonQuixoteIEnglish\""}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Row fraction = \"", "0.`"}, "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          0, " example of ", "AliceInWonderland", " misclassified as ", 
+           "DonQuixoteIEnglish"}], 
+         Row[{"Row fraction = ", 0.}], 
+         Row[{"Column fraction = ", 0.}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["0", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {2.5, 3.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "0", "\" example of \"", "\"BeowulfModern\"", 
+             "\" misclassified as \"", "\"DonQuixoteIEnglish\""}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Row fraction = \"", "0.`"}, "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          0, " example of ", "BeowulfModern", " misclassified as ", 
+           "DonQuixoteIEnglish"}], 
+         Row[{"Row fraction = ", 0.}], 
+         Row[{"Column fraction = ", 0.}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["31", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {2.5, 2.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "31", "\" examples of \"", "\"DonQuixoteIEnglish\"", 
+             "\" correctly classified\""}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Precision = \"", "0.7380952380952381`"}, 
+            "RowDefault"]}, {
+           
+           TemplateBox[{"\"Recall = \"", "0.9117647058823529`"}, 
+            "RowDefault"]}, {
+           
+           TemplateBox[{"\"FScore = \"", "0.8157894736842106`"}, 
+            "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+         DefaultBaseStyle -> "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          31, " examples of ", "DonQuixoteIEnglish", 
+           " correctly classified"}], 
+         Row[{"Precision = ", 0.7380952380952381}], 
+         Row[{"Recall = ", 0.9117647058823529}], 
+         Row[{"FScore = ", 0.8157894736842106}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["3", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {2.5, 1.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "3", "\" examples of \"", "\"Hamlet\"", "\" misclassified as \"", 
+             "\"DonQuixoteIEnglish\""}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Row fraction = \"", "0.06666666666666667`"}, 
+            "RowDefault"]}, {
+           
+           TemplateBox[{"\"Column fraction = \"", "0.08823529411764706`"}, 
+            "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+         DefaultBaseStyle -> "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          3, " examples of ", "Hamlet", " misclassified as ", 
+           "DonQuixoteIEnglish"}], 
+         Row[{"Row fraction = ", 0.06666666666666667}], 
+         Row[{"Column fraction = ", 0.08823529411764706}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["0", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {2.5, 0.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "0", "\" example of \"", "\"OriginOfSpecies\"", 
+             "\" misclassified as \"", "\"DonQuixoteIEnglish\""}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Row fraction = \"", "0.`"}, "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          0, " example of ", "OriginOfSpecies", " misclassified as ", 
+           "DonQuixoteIEnglish"}], 
+         Row[{"Row fraction = ", 0.}], 
+         Row[{"Column fraction = ", 0.}]}], "Tooltip"]& ]}, {
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["1", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {3.5, 4.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "1", "\" example of \"", "\"AliceInWonderland\"", 
+             "\" misclassified as \"", "\"Hamlet\""}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Row fraction = \"", "0.027777777777777776`"}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.02`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          1, " example of ", "AliceInWonderland", " misclassified as ", 
+           "Hamlet"}], 
+         Row[{"Row fraction = ", 0.027777777777777776`}], 
+         Row[{"Column fraction = ", 0.02}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["4", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {3.5, 3.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "4", "\" examples of \"", "\"BeowulfModern\"", 
+             "\" misclassified as \"", "\"Hamlet\""}, "RowDefault"]}, {
+           TemplateBox[{"\"Row fraction = \"", "0.1`"}, "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.08`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          4, " examples of ", "BeowulfModern", " misclassified as ", 
+           "Hamlet"}], 
+         Row[{"Row fraction = ", 0.1}], 
+         Row[{"Column fraction = ", 0.08}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["5", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {3.5, 2.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "5", "\" examples of \"", "\"DonQuixoteIEnglish\"", 
+             "\" misclassified as \"", "\"Hamlet\""}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Row fraction = \"", "0.11904761904761904`"}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.1`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          5, " examples of ", "DonQuixoteIEnglish", " misclassified as ", 
+           "Hamlet"}], 
+         Row[{"Row fraction = ", 0.11904761904761904`}], 
+         Row[{"Column fraction = ", 0.1}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["38", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {3.5, 1.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "38", "\" examples of \"", "\"Hamlet\"", 
+             "\" correctly classified\""}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Precision = \"", "0.8444444444444444`"}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Recall = \"", "0.76`"}, "RowDefault"]}, {
+           TemplateBox[{"\"FScore = \"", "0.8`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{38, " examples of ", "Hamlet", " correctly classified"}], 
+         Row[{"Precision = ", 0.8444444444444444}], 
+         Row[{"Recall = ", 0.76}], 
+         Row[{"FScore = ", 0.8}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["2", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {3.5, 0.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "2", "\" examples of \"", "\"OriginOfSpecies\"", 
+             "\" misclassified as \"", "\"Hamlet\""}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Row fraction = \"", "0.05405405405405406`"}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.04`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          2, " examples of ", "OriginOfSpecies", " misclassified as ", 
+           "Hamlet"}], 
+         Row[{"Row fraction = ", 0.05405405405405406}], 
+         Row[{"Column fraction = ", 0.04}]}], "Tooltip"]& ]}, {
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["0", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {4.5, 4.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "0", "\" example of \"", "\"AliceInWonderland\"", 
+             "\" misclassified as \"", "\"OriginOfSpecies\""}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Row fraction = \"", "0.`"}, "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          0, " example of ", "AliceInWonderland", " misclassified as ", 
+           "OriginOfSpecies"}], 
+         Row[{"Row fraction = ", 0.}], 
+         Row[{"Column fraction = ", 0.}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["0", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {4.5, 3.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "0", "\" example of \"", "\"BeowulfModern\"", 
+             "\" misclassified as \"", "\"OriginOfSpecies\""}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Row fraction = \"", "0.`"}, "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          0, " example of ", "BeowulfModern", " misclassified as ", 
+           "OriginOfSpecies"}], 
+         Row[{"Row fraction = ", 0.}], 
+         Row[{"Column fraction = ", 0.}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["0", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {4.5, 2.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "0", "\" example of \"", "\"DonQuixoteIEnglish\"", 
+             "\" misclassified as \"", "\"OriginOfSpecies\""}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Row fraction = \"", "0.`"}, "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          0, " example of ", "DonQuixoteIEnglish", " misclassified as ", 
+           "OriginOfSpecies"}], 
+         Row[{"Row fraction = ", 0.}], 
+         Row[{"Column fraction = ", 0.}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["0", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {4.5, 1.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "0", "\" example of \"", "\"Hamlet\"", "\" misclassified as \"", 
+             "\"OriginOfSpecies\""}, "RowDefault"]}, {
+           TemplateBox[{"\"Row fraction = \"", "0.`"}, "RowDefault"]}, {
+           TemplateBox[{"\"Column fraction = \"", "0.`"}, "RowDefault"]}}, 
+         GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+         "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          0, " example of ", "Hamlet", " misclassified as ", 
+           "OriginOfSpecies"}], 
+         Row[{"Row fraction = ", 0.}], 
+         Row[{"Column fraction = ", 0.}]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       InsetBox[
+        GraphicsBox[{
+          Opacity[1.], 
+          InsetBox[
+           FormBox["35", TraditionalForm], {0.5, 0.5}], 
+          Opacity[0.], 
+          RectangleBox[{0, 0}, {1, 1}]}], {4.5, 0.5}, Automatic, {1., 1.}], 
+       TagBox[
+        GridBox[{{
+           
+           TemplateBox[{
+            "35", "\" examples of \"", "\"OriginOfSpecies\"", 
+             "\" correctly classified\""}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"Precision = \"", "0.9459459459459459`"}, 
+            "RowDefault"]}, {
+           TemplateBox[{"\"Recall = \"", "1.`"}, "RowDefault"]}, {
+           
+           TemplateBox[{"\"FScore = \"", "0.9722222222222221`"}, 
+            "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+         DefaultBaseStyle -> "Column", 
+         GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+      Annotation[#, 
+       Column[{
+         Row[{
+          35, " examples of ", "OriginOfSpecies", " correctly classified"}], 
+         Row[{"Precision = ", 0.9459459459459459}], 
+         Row[{"Recall = ", 1.}], 
+         Row[{"FScore = ", 0.9722222222222221}]}], "Tooltip"]& ]}, 
+    TagBox[
+     TooltipBox[
+      InsetBox[
+       GraphicsBox[{
+         Opacity[0.], 
+         RectangleBox[{0, 0}, {1, 1}]}], {5.5, 4.5}, Automatic, {10., 1.}], 
+      TagBox[
+       GridBox[{{
+          
+          TemplateBox[{
+           "36", "\" example\"", "\"s\"", "\" of class \"", 
+            "\"AliceInWonderland\""}, "RowDefault"]}, {
+          
+          TemplateBox[{"\"Precision = \"", "0.9722222222222222`"}, 
+           "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+        DefaultBaseStyle -> "Column", 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+     Annotation[#, 
+      Column[{
+        Row[{36, " example", "s", " of class ", "AliceInWonderland"}], 
+        Row[{"Precision = ", 0.9722222222222222}]}], "Tooltip"]& ], 
+    TagBox[
+     TooltipBox[
+      InsetBox[
+       GraphicsBox[{
+         Opacity[0.], 
+         RectangleBox[{0, 0}, {1, 1}]}], {5.5, 3.5}, Automatic, {10., 1.}], 
+      TagBox[
+       GridBox[{{
+          
+          TemplateBox[{
+           "40", "\" example\"", "\"s\"", "\" of class \"", 
+            "\"BeowulfModern\""}, "RowDefault"]}, {
+          TemplateBox[{"\"Precision = \"", "0.85`"}, "RowDefault"]}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+        "Column", 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+     Annotation[#, 
+      Column[{
+        Row[{40, " example", "s", " of class ", "BeowulfModern"}], 
+        Row[{"Precision = ", 0.85}]}], "Tooltip"]& ], 
+    TagBox[
+     TooltipBox[
+      InsetBox[
+       GraphicsBox[{
+         Opacity[0.], 
+         RectangleBox[{0, 0}, {1, 1}]}], {5.5, 2.5}, Automatic, {10., 1.}], 
+      TagBox[
+       GridBox[{{
+          
+          TemplateBox[{
+           "42", "\" example\"", "\"s\"", "\" of class \"", 
+            "\"DonQuixoteIEnglish\""}, "RowDefault"]}, {
+          
+          TemplateBox[{"\"Precision = \"", "0.7380952380952381`"}, 
+           "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+        DefaultBaseStyle -> "Column", 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+     Annotation[#, 
+      Column[{
+        Row[{42, " example", "s", " of class ", "DonQuixoteIEnglish"}], 
+        Row[{"Precision = ", 0.7380952380952381}]}], "Tooltip"]& ], 
+    TagBox[
+     TooltipBox[
+      InsetBox[
+       GraphicsBox[{
+         Opacity[0.], 
+         RectangleBox[{0, 0}, {1, 1}]}], {5.5, 1.5}, Automatic, {10., 1.}], 
+      TagBox[
+       GridBox[{{
+          
+          TemplateBox[{
+           "45", "\" example\"", "\"s\"", "\" of class \"", "\"Hamlet\""}, 
+           "RowDefault"]}, {
+          
+          TemplateBox[{"\"Precision = \"", "0.8444444444444444`"}, 
+           "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+        DefaultBaseStyle -> "Column", 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+     Annotation[#, 
+      Column[{
+        Row[{45, " example", "s", " of class ", "Hamlet"}], 
+        Row[{"Precision = ", 0.8444444444444444}]}], "Tooltip"]& ], 
+    TagBox[
+     TooltipBox[
+      InsetBox[
+       GraphicsBox[{
+         Opacity[0.], 
+         RectangleBox[{0, 0}, {1, 1}]}], {5.5, 0.5}, Automatic, {10., 1.}], 
+      TagBox[
+       GridBox[{{
+          
+          TemplateBox[{
+           "37", "\" example\"", "\"s\"", "\" of class \"", 
+            "\"OriginOfSpecies\""}, "RowDefault"]}, {
+          
+          TemplateBox[{"\"Precision = \"", "0.9459459459459459`"}, 
+           "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+        DefaultBaseStyle -> "Column", 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+     Annotation[#, 
+      Column[{
+        Row[{37, " example", "s", " of class ", "OriginOfSpecies"}], 
+        Row[{"Precision = ", 0.9459459459459459}]}], "Tooltip"]& ], 
+    TagBox[
+     TooltipBox[
+      InsetBox[
+       GraphicsBox[{
+         Opacity[0.], 
+         RectangleBox[{0, 0}, {1, 1}]}], {0.5, -0.5}, Automatic, {1., 10.}], 
+      TagBox[
+       GridBox[{{
+          
+          TemplateBox[{
+           "43", "\" example\"", "\"s\"", "\" classified as \"", 
+            "\"AliceInWonderland\""}, "RowDefault"]}, {
+          
+          TemplateBox[{"\"Recall = \"", "0.813953488372093`"}, 
+           "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+        DefaultBaseStyle -> "Column", 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+     Annotation[#, 
+      Column[{
+        Row[{43, " example", "s", " classified as ", "AliceInWonderland"}], 
+        Row[{"Recall = ", 0.813953488372093}]}], "Tooltip"]& ], 
+    TagBox[
+     TooltipBox[
+      InsetBox[
+       GraphicsBox[{
+         Opacity[0.], 
+         RectangleBox[{0, 0}, {1, 1}]}], {1.5, -0.5}, Automatic, {1., 10.}], 
+      TagBox[
+       GridBox[{{
+          
+          TemplateBox[{
+           "38", "\" example\"", "\"s\"", "\" classified as \"", 
+            "\"BeowulfModern\""}, "RowDefault"]}, {
+          
+          TemplateBox[{"\"Recall = \"", "0.8947368421052632`"}, 
+           "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+        DefaultBaseStyle -> "Column", 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+     Annotation[#, 
+      Column[{
+        Row[{38, " example", "s", " classified as ", "BeowulfModern"}], 
+        Row[{"Recall = ", 0.8947368421052632}]}], "Tooltip"]& ], 
+    TagBox[
+     TooltipBox[
+      InsetBox[
+       GraphicsBox[{
+         Opacity[0.], 
+         RectangleBox[{0, 0}, {1, 1}]}], {2.5, -0.5}, Automatic, {1., 10.}], 
+      TagBox[
+       GridBox[{{
+          
+          TemplateBox[{
+           "34", "\" example\"", "\"s\"", "\" classified as \"", 
+            "\"DonQuixoteIEnglish\""}, "RowDefault"]}, {
+          
+          TemplateBox[{"\"Recall = \"", "0.9117647058823529`"}, 
+           "RowDefault"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+        DefaultBaseStyle -> "Column", 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+     Annotation[#, 
+      Column[{
+        Row[{34, " example", "s", " classified as ", "DonQuixoteIEnglish"}], 
+        Row[{"Recall = ", 0.9117647058823529}]}], "Tooltip"]& ], 
+    TagBox[
+     TooltipBox[
+      InsetBox[
+       GraphicsBox[{
+         Opacity[0.], 
+         RectangleBox[{0, 0}, {1, 1}]}], {3.5, -0.5}, Automatic, {1., 10.}], 
+      TagBox[
+       GridBox[{{
+          
+          TemplateBox[{
+           "50", "\" example\"", "\"s\"", "\" classified as \"", 
+            "\"Hamlet\""}, "RowDefault"]}, {
+          TemplateBox[{"\"Recall = \"", "0.76`"}, "RowDefault"]}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+        "Column", 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+     Annotation[#, 
+      Column[{
+        Row[{50, " example", "s", " classified as ", "Hamlet"}], 
+        Row[{"Recall = ", 0.76}]}], "Tooltip"]& ], 
+    TagBox[
+     TooltipBox[
+      InsetBox[
+       GraphicsBox[{
+         Opacity[0.], 
+         RectangleBox[{0, 0}, {1, 1}]}], {4.5, -0.5}, Automatic, {1., 10.}], 
+      TagBox[
+       GridBox[{{
+          
+          TemplateBox[{
+           "35", "\" example\"", "\"s\"", "\" classified as \"", 
+            "\"OriginOfSpecies\""}, "RowDefault"]}, {
+          TemplateBox[{"\"Recall = \"", "1.`"}, "RowDefault"]}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+        "Column", 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]], 
+     Annotation[#, 
+      Column[{
+        Row[{35, " example", "s", " classified as ", "OriginOfSpecies"}], 
+        Row[{"Recall = ", 1.}]}], "Tooltip"]& ]},
+  Frame->True,
+  FrameLabel->{
+    FormBox["\"predicted class\"", TraditionalForm], 
+    FormBox["\"actual class\"", TraditionalForm]},
+  FrameTicks->{{{{4.5, 
+       FormBox[
+        RotationBox["\"AliceInWonderland\"", BoxRotation -> 0.], 
+        TraditionalForm]}, {3.5, 
+       FormBox[
+        RotationBox["\"BeowulfModern\"", BoxRotation -> 0.], 
+        TraditionalForm]}, {2.5, 
+       FormBox[
+        RotationBox["\"DonQuixoteIEnglish\"", BoxRotation -> 0.], 
+        TraditionalForm]}, {1.5, 
+       FormBox[
+        RotationBox["\"Hamlet\"", BoxRotation -> 0.], TraditionalForm]}, {0.5, 
+       FormBox[
+        RotationBox["\"OriginOfSpecies\"", BoxRotation -> 0.], 
+        TraditionalForm]}}, {{4.5, 
+       FormBox["36", TraditionalForm]}, {3.5, 
+       FormBox["40", TraditionalForm]}, {2.5, 
+       FormBox["42", TraditionalForm]}, {1.5, 
+       FormBox["45", TraditionalForm]}, {0.5, 
+       FormBox["37", TraditionalForm]}}}, {{{0.5, 
+       FormBox[
+        RotationBox["43", BoxRotation -> 1.5707963267948966`], 
+        TraditionalForm]}, {1.5, 
+       FormBox[
+        RotationBox["38", BoxRotation -> 1.5707963267948966`], 
+        TraditionalForm]}, {2.5, 
+       FormBox[
+        RotationBox["34", BoxRotation -> 1.5707963267948966`], 
+        TraditionalForm]}, {3.5, 
+       FormBox[
+        RotationBox["50", BoxRotation -> 1.5707963267948966`], 
+        TraditionalForm]}, {4.5, 
+       FormBox[
+        RotationBox["35", BoxRotation -> 1.5707963267948966`], 
+        TraditionalForm]}}, {{0.5, 
+       FormBox[
+        RotationBox[
+        "\"AliceInWonderland\"", BoxRotation -> 1.5707963267948966`], 
+        TraditionalForm]}, {1.5, 
+       FormBox[
+        RotationBox["\"BeowulfModern\"", BoxRotation -> 1.5707963267948966`], 
+        TraditionalForm]}, {2.5, 
+       FormBox[
+        RotationBox[
+        "\"DonQuixoteIEnglish\"", BoxRotation -> 1.5707963267948966`], 
+        TraditionalForm]}, {3.5, 
+       FormBox[
+        RotationBox["\"Hamlet\"", BoxRotation -> 1.5707963267948966`], 
+        TraditionalForm]}, {4.5, 
+       FormBox[
+        RotationBox[
+        "\"OriginOfSpecies\"", BoxRotation -> 1.5707963267948966`], 
+        TraditionalForm]}}}},
+  FrameTicksStyle->12,
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImageSize->{603., Automatic},
+  Method->{
+   "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+    "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+    "RangePadding" -> Scaled[0.05]}]], "Output",
+ CellChangeTimes->{
+  3.6821648835034046`*^9, 3.6821649506224823`*^9, 3.6821652327154207`*^9, 
+   3.6821667539147367`*^9, {3.682166795883872*^9, 3.6821668107702217`*^9}, 
+   3.682166938145934*^9, 3.6821719224350696`*^9, 3.682177655209305*^9, 
+   3.682178011055665*^9, 3.6821784593018856`*^9, 3.682179824080678*^9, 
+   3.6821806283948617`*^9, 3.6821810075813403`*^9, 3.6821819041886363`*^9, 
+   3.682182000656331*^9, 3.6821822068585815`*^9, 3.68218231446426*^9, 
+   3.682182571074676*^9, 3.682182739768445*^9, 3.6821830655334597`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"cm", "[", "\"\<Accuracy\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.682165264359501*^9, 3.682165268688819*^9}}],
+
+Cell[BoxData["0.865`"], "Output",
+ CellChangeTimes->{
+  3.6821652689545393`*^9, 3.6821668149847536`*^9, 3.682166952353788*^9, 
+   3.682171944655281*^9, {3.682177657420867*^9, 3.68217765948355*^9}, 
+   3.6821780129874377`*^9, 3.682178462211692*^9, 3.682179829657421*^9, 
+   3.6821806300608463`*^9, 3.6821810273264694`*^9, 3.682181908091089*^9, 
+   3.6821820021315994`*^9, 3.682182211822039*^9, 3.6821823161848326`*^9, 
+   3.682182745491619*^9, 3.6821830679734793`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"Reverse", "/@", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"RandomSample", "[", 
+       RowBox[{"rawdata", ",", "40"}], "]"}], "/.", 
+      RowBox[{"{", 
+       RowBox[{"Rule", "\[Rule]", "List"}], "}"}]}], ")"}]}], ",", 
+   RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6821798481715164`*^9, 3.6821798748433466`*^9}, {
+  3.682179934795658*^9, 3.682179934866757*^9}, {3.682182221839553*^9, 
+  3.682182268712712*^9}, {3.6821827601181555`*^9, 3.682182766806939*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"BeowulfModern\"\>", "\<\"came   mind  bid  henchmen  hall uprear,  \
+master mead-house, mightier far    seen   sons  earth,   , ,  old  young    \
+allot   Lord  sent , save   land   lives   men.\"\>"},
+    {"\<\"Hamlet\"\>", "\<\"[Enter Hamlet, Horatio,  Marcellus.] Ham.\"\>"},
+    {"\<\"AliceInWonderland\"\>", "\<\"\\\"  tarts  ?\\\" \\\"Pepper, ,\\\" \
+said  cook.\"\>"},
+    {"\<\"AliceInWonderland\"\>", "\<\"Just  Alice ran   Duchess (     \
+prison).\"\>"},
+    {"\<\"BeowulfModern\"\>", "\<\"'Twas granted      edge  iron    help   \
+strife:  strong   hand,   tale  told,   tried  far  strength  stroke  swords  \
+wielded,  sturdy  steel:  steaded  nought.\"\>"},
+    {"\<\"OriginOfSpecies\"\>", "\<\"Recapitulation   difficulties   theory  \
+Natural Selection.\"\>"},
+    {"\<\"BeowulfModern\"\>", "\<\"Lo, sudden  shift!\"\>"},
+    {"\<\"OriginOfSpecies\"\>", "\<\"masters determine     new nest shall  \
+formed,    migrate,  masters carry  slaves.\"\>"},
+    {"\<\"OriginOfSpecies\"\>", "\<\", , reason  suspect,  information given  \
+ Mr. W. W. Edwards,    English race-horse  spinal stripe   commoner   foal    \
+-grown animal.\"\>"},
+    {"\<\"OriginOfSpecies\"\>", "\<\"nature variability   powerful agent  \
+ready  act  select,    doubt  variations   way useful  beings,   excessively \
+complex relations  life,   preserved, accumulated,  inherited?\"\>"},
+    {"\<\"BeowulfModern\"\>", "\<\"death  yore  hurried  hence;    left  \
+live,     clan, weeping  friends,  wished  bide warding  treasure,   delight, \
+ brief  respite.\"\>"},
+    {"\<\"AliceInWonderland\"\>", "\<\"considering    mind (    ,   day   \
+feel  sleepy  stupid),   pleasure  making  daisy-chain   worth  trouble  \
+getting   picking  daisies,  suddenly  White Rabbit  pink eyes ran close  .\"\
+\>"},
+    {"\<\"DonQuixoteIEnglish\"\>", "\<\"Anselmo,   true,  somewhat  inclined  \
+seek pleasure  love  Lothario,    pleasures   chase   attraction;   occasion \
+Anselmo  forego   tastes  yield    Lothario,  Lothario  surrender   fall     \
+Anselmo,    way  inclinations kept pace       concord  perfect   best \
+regulated clock   surpass .\"\>"},
+    {"\<\"OriginOfSpecies\"\>", "\<\"Certainly  clear line  demarcation     \
+drawn  species  sub-species-- ,  forms    opinion   naturalists come  near ,  \
+  quite arrive   rank  species; , ,  sub-species  -marked varieties,   lesser \
+varieties  individual differences.\"\>"},
+    {"\<\"DonQuixoteIEnglish\"\>", "\<\"know   devil   come ,    love     got \
+;    young girl,     mere boy;   verily believe      age,     sixteen ;     \
+sixteen Michaelmas Day, ,  father says.\\\"\"\>"},
+    {"\<\"DonQuixoteIEnglish\"\>", "\<\"Anselmo   believe ,  blind  rage drew \
+ dagger  threatened  stab Leonela, bidding  tell  truth    kill .\"\>"},
+    {"\<\"AliceInWonderland\"\>", "\<\"invitation   Queen  play \
+croquet.\\\"\"\>"},
+    {"\<\"OriginOfSpecies\"\>", "\<\"stated    chapter,     evidence  render  \
+probable,   whatever age  variation  appears   parent,  tends  reappear   \
+corresponding age   offspring.\"\>"},
+    {"\<\"Hamlet\"\>", "\<\"backed like  weasel.\"\>"},
+    {"\<\"DonQuixoteIEnglish\"\>", "\<\"gone   miles Don Quixote perceived  \
+large party  people, ,  afterwards appeared,   Toledo traders,   way  buy \
+silk  Murcia.\"\>"},
+    {"\<\"OriginOfSpecies\"\>", "\<\"Undoubtedly     important point  \
+difference  varieties  species; namely,   amount  difference  varieties,  \
+compared       parent-species,        species    genus.\"\>"},
+    {"\<\"AliceInWonderland\"\>", "\<\"Alice said  ,       sneezing.\"\>"},
+    {"\<\"OriginOfSpecies\"\>", "\<\"asserted,    best short-beaked \
+tumbler-pigeons  perish   egg   able     ;   fanciers assist   act  hatching.\
+\"\>"},
+    {"\<\"Hamlet\"\>", "\<\"King.\"\>"},
+    {"\<\"DonQuixoteIEnglish\"\>", "\<\"Bethink thee     seeks \
+impossibilities    possible   justice  withheld,   better expressed   poet  \
+said: 'Tis mine  seek  life  death, Health  disease seek ,  seek  prison \
+freedom's breath,  traitors loyalty.\"\>"},
+    {"\<\"DonQuixoteIEnglish\"\>", "\<\"care  pains  unavailing,   master   \
+discovery      man,  harboured   base designs   servant;   fortune    supply  \
+remedy  cases  difficulty,     precipice  ravine  hand    fling  master  cure \
+ passion,      servant's case,  thought   lesser evil  leave    conceal    \
+crags,  make trial   strength  argument  . ,   say,    went  hiding  seek   \
+place     sighs  tears implore Heaven   pity   misery,  grant  help  strength \
+ escape  ,  let  die   solitudes, leaving  trace   unhappy  ,   fault  ,  \
+furnished matter  talk  scandal  home  abroad.\\\"\"\>"},
+    {"\<\"Hamlet\"\>", "\<\"Laer.\"\>"},
+    {"\<\"Hamlet\"\>", "\<\"loves  ;    soil  cautel doth besmirch  virtue   \
+:    fear,  greatness weigh'd,      ;     subject   birth:   ,  unvalu'd \
+persons , Carve  ;    choice depends  safety  health    state;     choice  \
+circumscrib'd Unto  voice  yielding   body Whereof    head.\"\>"},
+    {"\<\"OriginOfSpecies\"\>", "\<\"plants  animals migrated southward,     \
+mingled    great region   native American productions,     compete  ;     \
+great region,     Old World.\"\>"},
+    {"\<\"AliceInWonderland\"\>", "\<\"just   taken  highest tree   wood,\\\" \
+continued  Pigeon, raising  voice   shriek, \\\" just    thinking    free    \
+,   needs come wriggling    sky!\"\>"},
+    {"\<\"AliceInWonderland\"\>", "\<\"caused  remarkable sensation   \
+party.\"\>"},
+    {"\<\"OriginOfSpecies\"\>", "\<\"superfluous  remark  hardly  fossil-fish \
+ known  south   equator;   running  Pictet's Palaeontology    seen    species \
+ known   formations  Europe.\"\>"},
+    {"\<\"AliceInWonderland\"\>", "\<\"IV-- RABBIT SENDS   LITTLE BILL    \
+White Rabbit, trotting slowly    looking anxiously    went,     lost ; Alice \
+heard  muttering  , \\\" Duchess!\"\>"},
+    {"\<\"DonQuixoteIEnglish\"\>", "\<\"\\\" God's name, , senor,\\\" replied \
+Don Quixote; \\\"   ,     know    held enchanted   cage   envy  fraud  wicked \
+enchanters;  virtue   persecuted   wicked  loved   good.\"\>"},
+    {"\<\"Hamlet\"\>", "\<\"Queen.\"\>"},
+    {"\<\"BeowulfModern\"\>", "\<\"song  glee.\"\>"},
+    {"\<\"OriginOfSpecies\"\>", "\<\"feel assured    individuals    species,  \
+  closely allied species   genera,      remote period descended   parent,   \
+migrated    birthplace;    better know   means  migration, ,   light  geology \
+ throws,   continue  throw,  former changes  climate    level   land,  shall \
+surely  enabled  trace   admirable manner  former migrations   inhabitants    \
+world.\"\>"},
+    {"\<\"BeowulfModern\"\>", "\<\"came   killed   sword nine   nicors.\"\>"},
+    {"\<\"AliceInWonderland\"\>", "\<\"moment  felt  violent blow underneath  \
+chin--  struck  foot!\"\>"},
+    {"\<\"BeowulfModern\"\>", "\<\"kissed  king  kin renowned, Scyldings' \
+chieftain,  choicest thane,  fell   neck.\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{{3.682179853514*^9, 3.6821799354257307`*^9}, 
+   3.6821800800357475`*^9, 3.682180631933305*^9, 3.682181910426731*^9, {
+   3.6821822134714265`*^9, 3.682182269185795*^9}, {3.6821827475960493`*^9, 
+   3.682182766957157*^9}, 3.6821830742071266`*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{892, 948},
+WindowMargins->{{Automatic, -1023}, {-344, Automatic}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (August 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 100, 1, 101, "Title"],
+Cell[683, 25, 314, 8, 30, "Input"],
+Cell[1000, 35, 418, 11, 30, "Input"],
+Cell[1421, 48, 1506, 31, 183, "Input"],
+Cell[2930, 81, 690, 19, 30, "Input"],
+Cell[CellGroupData[{
+Cell[3645, 104, 136, 2, 30, "Input"],
+Cell[3784, 108, 195, 3, 30, "Output"]
+}, Open  ]],
+Cell[3994, 114, 1311, 34, 126, "Input"],
+Cell[5308, 150, 374, 11, 30, "Input"],
+Cell[CellGroupData[{
+Cell[5707, 165, 132, 2, 30, "Input"],
+Cell[5842, 169, 126, 2, 30, "Output"]
+}, Open  ]],
+Cell[5983, 174, 637, 15, 50, "Input"],
+Cell[CellGroupData[{
+Cell[6645, 193, 1200, 23, 50, "Input"],
+Cell[7848, 218, 10069, 206, 155, "Output"]
+}, Open  ]],
+Cell[17932, 427, 208, 5, 30, "Input"],
+Cell[CellGroupData[{
+Cell[18165, 436, 133, 2, 30, "Input"],
+Cell[18301, 440, 30911, 635, 151, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49249, 1080, 779, 15, 50, "Input"],
+Cell[50031, 1097, 9810, 201, 155, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[59878, 1303, 101, 1, 39, "Subsubsection"],
+Cell[59982, 1306, 351, 7, 30, "Input"],
+Cell[CellGroupData[{
+Cell[60358, 1317, 149, 2, 30, "Input"],
+Cell[60510, 1321, 40455, 1051, 620, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[101002, 2377, 136, 2, 30, "Input"],
+Cell[101141, 2381, 467, 7, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[101645, 2393, 560, 13, 30, "Input"],
+Cell[102208, 2408, 7384, 117, 874, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

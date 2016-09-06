@@ -1,0 +1,1048 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     48540,       1040]
+NotebookOptionsPosition[     47932,       1014]
+NotebookOutlinePosition[     48278,       1029]
+CellTagsIndexPosition[     48235,       1026]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData["Quit"], "Input",
+ CellChangeTimes->{{3.6814697647399483`*^9, 3.681469765149735*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"layers", "=", 
+   RowBox[{"<|", 
+    RowBox[{
+     RowBox[{"\"\<convolve\>\"", "\[Rule]", 
+      RowBox[{"ConvolutionLayer", "[", 
+       RowBox[{"10", ",", "3"}], "]"}]}], ",", 
+     RowBox[{"\"\<ramp\>\"", "\[Rule]", 
+      RowBox[{"ElementwiseLayer", "[", "Ramp", "]"}]}], ",", 
+     RowBox[{"\"\<pool\>\"", "\[Rule]", 
+      RowBox[{"PoolingLayer", "[", 
+       RowBox[{"2", ",", "2"}], "]"}]}], ",", 
+     RowBox[{"\"\<flatten\>\"", "\[Rule]", 
+      RowBox[{"FlattenLayer", "[", "]"}]}], ",", 
+     RowBox[{"\"\<connect\>\"", "\[Rule]", 
+      RowBox[{"DotPlusLayer", "[", "10", "]"}]}], ",", 
+     RowBox[{"\"\<softmax\>\"", "\[Rule]", 
+      RowBox[{"SoftmaxLayer", "[", "]"}]}]}], "|>"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6814685348312984`*^9, 3.681468536525623*^9}, {
+  3.6814688372282143`*^9, 3.681468844756158*^9}, {3.681469724148761*^9, 
+  3.681469734036714*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"keys", "=", 
+   RowBox[{"Keys", "[", "layers", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.681468865536954*^9, 3.681468869292232*^9}, {
+   3.68146896338041*^9, 3.6814689646118917`*^9}, 3.6814697841253386`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"convolve\"\>", ",", "\<\"ramp\"\>", ",", "\<\"pool\"\>", 
+   ",", "\<\"flatten\"\>", ",", "\<\"connect\"\>", ",", "\<\"softmax\"\>"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.681468869554923*^9, 3.681468964948703*^9, 
+  3.681469735814827*^9, 3.681469779166872*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"rules", "=", 
+  RowBox[{"Fold", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Rule", "[", 
+      RowBox[{"#2", ",", "#1"}], "]"}], "&"}], ",", 
+    RowBox[{"Reverse", "[", "keys", "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.681469751315637*^9, 3.6814697855727053`*^9}, {
+  3.6814712227975054`*^9, 3.6814712470458593`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\<\"convolve\"\>", "\[Rule]", 
+  RowBox[{"\<\"ramp\"\>", "\[Rule]", 
+   RowBox[{"\<\"pool\"\>", "\[Rule]", 
+    RowBox[{"\<\"flatten\"\>", "\[Rule]", 
+     RowBox[{"\<\"connect\"\>", 
+      "\[Rule]", "\<\"softmax\"\>"}]}]}]}]}]], "Output",
+ CellChangeTimes->{{3.6814712288253813`*^9, 3.681471247376766*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NetGraph", "[", 
+  RowBox[{"layers", ",", 
+   RowBox[{"{", "rules", "}"}], ",", 
+   RowBox[{"\"\<Input\>\"", "\[Rule]", 
+    RowBox[{"NetEncoder", "[", 
+     RowBox[{"{", 
+      RowBox[{"\"\<Image\>\"", ",", 
+       RowBox[{"{", 
+        RowBox[{"100", ",", "100"}], "}"}]}], "}"}], "]"}]}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6814711509827476`*^9, 3.681471206540865*^9}}],
+
+Cell[BoxData[
+ StyleBox[
+  TagBox[
+   TagBox[
+    RowBox[{"NetGraph", 
+     RowBox[{"[", 
+      PanelBox[
+       TagBox[
+        DynamicModuleBox[{NeuralNetworks`NetGraph`PackagePrivate`selection$$ =
+          None, NeuralNetworks`NetGraph`PackagePrivate`outIndex$$ = 7, 
+         NeuralNetworks`NetGraph`PackagePrivate`inputs$$ = Association[
+         "Input" -> NeuralNetworks`EncodedType[
+            NetEncoder["Image", 
+             Association[
+             "Parameters" -> 
+              Association[
+               "ImageSize" -> {100, 100}, "ColorSpace" -> "RGB", 
+                "ColorChannels" -> 3, "$AugmentationFunction" -> None, 
+                "Parallelize" -> False, "MeanImage" -> None], "Output" -> 
+              NeuralNetworks`ChannelT[3, 
+                NeuralNetworks`TensorT[2, {100, 100}]]]], 
+            NeuralNetworks`ChannelT[3, 
+             NeuralNetworks`TensorT[2, {100, 100}]]]], 
+         NeuralNetworks`NetGraph`PackagePrivate`outputs$$ = Association[
+         "Output" -> NeuralNetworks`TensorT[1, {10}]], 
+         NeuralNetworks`NetGraph`PackagePrivate`labels$$ = {
+         "convolve", "ramp", "pool", "flatten", "connect", "softmax", "Input",
+           "Output"}, NeuralNetworks`NetGraph`PackagePrivate`vertices$$ = 
+         Association[
+         "convolve" -> 
+          Association[
+           "Type" -> "Convolution", "Arrays" -> 
+            Association["Weights" -> NeuralNetworks`ChannelT[10, 
+                NeuralNetworks`ChannelT[3, 
+                 NeuralNetworks`TensorT[2, {3, 3}]]], "Biases" -> 
+              NeuralNetworks`Nullable[
+                NeuralNetworks`TensorT[1, {10}]]], "Parameters" -> 
+            Association[
+             "OutputChannels" -> 10, "KernelSize" -> {3, 3}, 
+              "Stride" -> {1, 1}, "PaddingSize" -> {0, 0}, 
+              "Dilation" -> {1, 1}, "InputChannels" -> 3, "$GroupNumber" -> 1,
+               "$InputSize" -> {100, 100}, "$OutputSize" -> {98, 98}], 
+            "Inputs" -> Association["Input" -> NeuralNetworks`ChannelT[3, 
+                NeuralNetworks`TensorT[2, {100, 100}]]], "Outputs" -> 
+            Association["Output" -> NeuralNetworks`ChannelT[10, 
+                NeuralNetworks`TensorT[2, {98, 98}]]]], "ramp" -> 
+          Association[
+           "Type" -> "Elementwise", "Arrays" -> Association[], "Parameters" -> 
+            Association[
+             "Function" -> Ramp, "$Dimensions" -> {10, 98, 98}, "$Rank" -> 3],
+             "Inputs" -> Association["Input" -> NeuralNetworks`ChannelT[10, 
+                NeuralNetworks`TensorT[2, {98, 98}]]], "Outputs" -> 
+            Association["Output" -> NeuralNetworks`TensorT[3, {10, 98, 98}]]],
+           "pool" -> Association[
+           "Type" -> "Pooling", "Arrays" -> Association[], "Parameters" -> 
+            Association[
+             "KernelSize" -> {2, 2}, "Stride" -> {2, 2}, 
+              "PaddingSize" -> {0, 0}, "Function" -> Max, "Channels" -> 10, 
+              "$InputSize" -> {98, 98}, "$OutputSize" -> {49, 49}], "Inputs" -> 
+            Association["Input" -> NeuralNetworks`TensorT[3, {10, 98, 98}]], 
+            "Outputs" -> Association["Output" -> NeuralNetworks`ChannelT[10, 
+                NeuralNetworks`TensorT[2, {49, 49}]]]], "flatten" -> 
+          Association[
+           "Type" -> "Flatten", "Arrays" -> Association[], "Parameters" -> 
+            Association[
+             "Dimensions" -> {10, 49, 49}, "$Rank" -> 3, "$OutputSize" -> 
+              24010], "Inputs" -> 
+            Association["Input" -> NeuralNetworks`ChannelT[10, 
+                NeuralNetworks`TensorT[2, {49, 49}]]], "Outputs" -> 
+            Association["Output" -> NeuralNetworks`TensorT[1, {24010}]]], 
+          "connect" -> 
+          Association[
+           "Type" -> "DotPlus", "Arrays" -> 
+            Association[
+             "Weights" -> NeuralNetworks`TensorT[2, {10, 24010}], "Biases" -> 
+              NeuralNetworks`Nullable[
+                NeuralNetworks`TensorT[1, {10}]]], "Parameters" -> 
+            Association["Size" -> 10, "$InputSize" -> 24010], "Inputs" -> 
+            Association["Input" -> NeuralNetworks`TensorT[1, {24010}]], 
+            "Outputs" -> 
+            Association["Output" -> NeuralNetworks`TensorT[1, {10}]]], 
+          "softmax" -> 
+          Association[
+           "Type" -> "Softmax", "Arrays" -> Association[], "Parameters" -> 
+            Association["Size" -> 10], "Inputs" -> 
+            Association["Input" -> NeuralNetworks`TensorT[1, {10}]], 
+            "Outputs" -> 
+            Association["Output" -> NeuralNetworks`TensorT[1, {10}]]]], 
+         NeuralNetworks`NetGraph`PackagePrivate`vports$$ = {
+          NetPort["Vertices", "convolve"], 
+          NetPort["Vertices", "ramp"], 
+          NetPort["Vertices", "pool"], 
+          NetPort["Vertices", "flatten"], 
+          NetPort["Vertices", "connect"], 
+          NetPort["Vertices", "softmax"], 
+          NetPort["Inputs", "Input"], 
+          NetPort["Outputs", "Output"]}}, 
+         TagBox[GridBox[{
+            {
+             TemplateBox[{TagBox[
+                GraphicsBox[{{
+                   GrayLevel[0.7], {
+                    
+                    LineBox[{{-6., 3.6739403974420594`*^-16}, {-5., 
+                    3.061616997868383*^-16}}], 
+                    
+                    LineBox[{{-5., 3.061616997868383*^-16}, {-4., 
+                    2.4492935982947064`*^-16}}], 
+                    
+                    LineBox[{{-4., 2.4492935982947064`*^-16}, {-3., 
+                    1.8369701987210297`*^-16}}], 
+                    
+                    LineBox[{{-3., 1.8369701987210297`*^-16}, {-2., 
+                    1.2246467991473532`*^-16}}], 
+                    
+                    LineBox[{{-2., 1.2246467991473532`*^-16}, {-1., 
+                    6.123233995736766*^-17}}], 
+                    
+                    LineBox[{{-7., 4.286263797015736*^-16}, {-6., 
+                    3.6739403974420594`*^-16}}], 
+                    LineBox[{{-1., 6.123233995736766*^-17}, {0., 0.}}]}}, {
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> False]], {-5.4, 
+                    3.3065463576978537`*^-16}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736762*^-17}], 
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> False]], {-4.4, 
+                    2.694222958124177*^-16}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736767*^-17}], 
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> False]], {-3.4, 
+                    2.0818995585505003`*^-16}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736767*^-17}], 
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> 
+                    False]], {-2.4000000000000004`, 
+                    1.4695761589768238`*^-16}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736765*^-17}], 
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> False]], {-1.4, 
+                    8.572527594031473*^-17}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736766*^-17}], 
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> False]], {-6.4, 
+                    3.9188697572715305`*^-16}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736767*^-17}], 
+                   InsetBox[
+                    GraphicsBox[
+                    StyleBox[
+                    
+                    PolygonBox[{{-1., 0.3333333333333333}, {0., 
+                    0.}, {-1., -0.3333333333333333}, {-0.6666666666666666, 
+                    0.}, {-1., 0.3333333333333333}}], 
+                    GrayLevel[0.7], StripOnInput -> False]], {-0.4, 
+                    2.4492935982947065`*^-17}, {-0.25, 0}, 
+                    Offset[8], {1., -6.123233995736766*^-17}]}, {
+                   GrayLevel[0], {
+                    AbsolutePointSize[5], {{
+                    Hue[0.61, 0.75, 1], 
+                    TagBox[
+                    PointBox[{-6., 3.6739403974420594`*^-16}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 1), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    RGBColor[0.29, 0.29, 0.83], 
+                    TagBox[
+                    PointBox[{-5., 3.061616997868383*^-16}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 2), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    RGBColor[0.38759999999999994`, 0.57, 0.], 
+                    TagBox[
+                    PointBox[{-4., 2.4492935982947064`*^-16}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 3), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    RGBColor[1., 0.4, 0.], 
+                    TagBox[
+                    PointBox[{-3., 1.8369701987210297`*^-16}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 4), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    GrayLevel[0.35], 
+                    TagBox[
+                    PointBox[{-2., 1.2246467991473532`*^-16}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 5), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    RGBColor[0.78, 0.64, 0.98], 
+                    TagBox[
+                    PointBox[{-1., 6.123233995736766*^-17}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 6), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    GrayLevel[0.5], 
+                    TagBox[
+                    PointBox[{-7., 4.286263797015736*^-16}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 7), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}, {
+                    GrayLevel[0.5], 
+                    TagBox[
+                    PointBox[{0., 0.}], 
+                    
+                    EventHandlerTag[{
+                    "MouseClicked" :> (
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$ = 8), 
+                    PassEventsUp -> False, Method -> "Preemptive", 
+                    PassEventsDown -> Automatic}]]}}}}, {{
+                    InsetBox[
+                    FormBox["\"convolve\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-6., 3.6739403974420594`*^-16}], 
+                    Offset[{0, -5.5}, {-6., 3.6739403974420594`*^-16}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"ramp\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-5., 3.061616997868383*^-16}], 
+                    Offset[{0, -5.5}, {-5., 3.061616997868383*^-16}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"pool\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-4., 2.4492935982947064`*^-16}], 
+                    Offset[{0, -5.5}, {-4., 2.4492935982947064`*^-16}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"flatten\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-3., 1.8369701987210297`*^-16}], 
+                    Offset[{0, -5.5}, {-3., 1.8369701987210297`*^-16}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"connect\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-2., 1.2246467991473532`*^-16}], 
+                    Offset[{0, -5.5}, {-2., 1.2246467991473532`*^-16}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"softmax\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-1., 6.123233995736766*^-17}], 
+                    Offset[{0, -5.5}, {-1., 6.123233995736766*^-17}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"Input\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {-7., 4.286263797015736*^-16}], 
+                    Offset[{0, -5.5}, {-7., 4.286263797015736*^-16}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}], 
+                    InsetBox[
+                    FormBox["\"Output\"", TraditionalForm], 
+                    NCache[
+                    Offset[{0, 
+                    Rational[-11, 2]}, {0., 0.}], 
+                    Offset[{0, -5.5}, {0., 0.}]], 
+                    ImageScaled[{
+                    Rational[1, 2], 1.}], Automatic, {1, 0}]}, 
+                   StyleBox[{
+                    InsetBox[
+                    FormBox["\"10\[Cross]98\[Cross]98\"", TraditionalForm], 
+                    
+                    Offset[{3.3677786976552195`*^-16, 5.5}, {-5.4, 
+                    3.3065463576978537`*^-16}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736762*^-17}], 
+                    InsetBox[
+                    FormBox["\"10\[Cross]98\[Cross]98\"", TraditionalForm], 
+                    
+                    Offset[{3.367778697655222*^-16, 5.5}, {-4.4, 
+                    2.694222958124177*^-16}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736767*^-17}], 
+                    InsetBox[
+                    FormBox["\"10\[Cross]49\[Cross]49\"", TraditionalForm], 
+                    
+                    Offset[{3.367778697655222*^-16, 5.5}, {-3.4, 
+                    2.0818995585505003`*^-16}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736767*^-17}], 
+                    InsetBox[
+                    FormBox["\"24010\"", TraditionalForm], 
+                    
+                    Offset[{3.3677786976552205`*^-16, 
+                    5.5}, {-2.4000000000000004`, 1.4695761589768238`*^-16}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736765*^-17}], 
+                    InsetBox[
+                    FormBox["\"10\"", TraditionalForm], 
+                    
+                    Offset[{3.3677786976552215`*^-16, 5.5}, {-1.4, 
+                    8.572527594031473*^-17}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736766*^-17}], 
+                    InsetBox[
+                    FormBox["\"3\[Cross]100\[Cross]100\"", TraditionalForm], 
+                    
+                    Offset[{3.367778697655222*^-16, 5.5}, {-6.4, 
+                    3.9188697572715305`*^-16}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736767*^-17}], 
+                    InsetBox[
+                    FormBox["\"10\"", TraditionalForm], 
+                    
+                    Offset[{3.3677786976552215`*^-16, 5.5}, {-0.4, 
+                    2.4492935982947065`*^-17}], 
+                    ImageScaled[{0.5, 0.415}], Automatic, {
+                    1., -6.123233995736766*^-17}]}, FontColor -> 
+                    GrayLevel[0.5], FontSize -> 8, FontWeight -> "Thin", 
+                    StripOnInput -> False]}, 
+                  
+                  DynamicModuleBox[{
+                   GeneralUtilities`Graphics`PackagePrivate`vpos$3296 = {{-6.,
+                     3.6739403974420594`*^-16}, {-5., 
+                    3.061616997868383*^-16}, {-4., 
+                    2.4492935982947064`*^-16}, {-3., 
+                    1.8369701987210297`*^-16}, {-2., 
+                    1.2246467991473532`*^-16}, {-1., 
+                    6.123233995736766*^-17}, {-7., 4.286263797015736*^-16}, {
+                    0., 0.}}}, 
+                   DynamicBox[
+                    Typeset`ToBoxes[
+                    If[
+                    Not[
+                    IntegerQ[
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$]], {}, {
+                    AbsolutePointSize[10], 
+                    Opacity[0.2, Black], 
+                    Point[
+                    Part[
+                    GeneralUtilities`Graphics`PackagePrivate`vpos$3296, 
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$]]}], 
+                    StandardForm, Graphics], 
+                    TrackedSymbols :> {
+                    NeuralNetworks`NetGraph`PackagePrivate`selection$$}], 
+                   DynamicModuleValues :> {}]}, 
+                 ImageSize -> {490., 25.680000000000028`}, AspectRatio -> 
+                 Full, PlotRangePadding -> 0, 
+                 ImagePadding -> {{19.5, 22.5}, {15.5, 10.179999999999998`}}, 
+                 ImageMargins -> {{0, 0}, {15, 15}}, 
+                 BaseStyle -> {TooltipBoxOptions -> {TooltipDelay -> 0.08}}], 
+                
+                EventHandlerTag[{
+                 "MouseClicked" :> (
+                   NeuralNetworks`NetGraph`PackagePrivate`selection$$ = None),
+                   Method -> "Preemptive", PassEventsDown -> Automatic, 
+                  PassEventsUp -> True}]],FormBox[
+                TemplateBox[{
+                  StyleBox["ConvolutionLayer", 
+                   GrayLevel[0.35], StripOnInput -> False], 
+                  StyleBox["ElementwiseLayer", 
+                   GrayLevel[0.35], StripOnInput -> False], 
+                  StyleBox["PoolingLayer", 
+                   GrayLevel[0.35], StripOnInput -> False], 
+                  StyleBox["FlattenLayer", 
+                   GrayLevel[0.35], StripOnInput -> False], 
+                  StyleBox["DotPlusLayer", 
+                   GrayLevel[0.35], StripOnInput -> False], 
+                  StyleBox["SoftmaxLayer", 
+                   GrayLevel[0.35], StripOnInput -> False]}, "PointLegend", 
+                 DisplayFunction -> (FormBox[
+                   StyleBox[
+                    StyleBox[
+                    PaneBox[
+                    TagBox[
+                    GridBox[{{
+                    TemplateBox[{
+                    GraphicsBox[{{}, {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    Hue[0.61, 0.75, 1]], {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    Hue[0.61, 0.75, 1]], 
+                    PointBox[
+                    NCache[{
+                    Scaled[{
+                    Rational[1, 2], 
+                    Rational[1, 2]}]}, {
+                    Scaled[{0.5, 0.5}]}]]}}}, AspectRatio -> Full, 
+                    ImageSize -> {12, 12}, PlotRangePadding -> None, 
+                    ImagePadding -> Automatic, 
+                    BaselinePosition -> (Scaled[0.16666666666666669`] -> 
+                    Baseline)], "\" \"", #}, "RowDefault"], 
+                    TemplateBox[{
+                    GraphicsBox[{{}, {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[1., 0.4, 0.]], {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[1., 0.4, 0.]], 
+                    PointBox[
+                    NCache[{
+                    Scaled[{
+                    Rational[1, 2], 
+                    Rational[1, 2]}]}, {
+                    Scaled[{0.5, 0.5}]}]]}}}, AspectRatio -> Full, 
+                    ImageSize -> {12, 12}, PlotRangePadding -> None, 
+                    ImagePadding -> Automatic, 
+                    BaselinePosition -> (Scaled[0.16666666666666669`] -> 
+                    Baseline)], "\" \"", #4}, "RowDefault"]}, {
+                    TemplateBox[{
+                    GraphicsBox[{{}, {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[0.29, 0.29, 0.83]], {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[0.29, 0.29, 0.83]], 
+                    PointBox[
+                    NCache[{
+                    Scaled[{
+                    Rational[1, 2], 
+                    Rational[1, 2]}]}, {
+                    Scaled[{0.5, 0.5}]}]]}}}, AspectRatio -> Full, 
+                    ImageSize -> {12, 12}, PlotRangePadding -> None, 
+                    ImagePadding -> Automatic, 
+                    BaselinePosition -> (Scaled[0.16666666666666669`] -> 
+                    Baseline)], "\" \"", #2}, "RowDefault"], 
+                    TemplateBox[{
+                    GraphicsBox[{{}, {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    GrayLevel[0.35]], {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    GrayLevel[0.35]], 
+                    PointBox[
+                    NCache[{
+                    Scaled[{
+                    Rational[1, 2], 
+                    Rational[1, 2]}]}, {
+                    Scaled[{0.5, 0.5}]}]]}}}, AspectRatio -> Full, 
+                    ImageSize -> {12, 12}, PlotRangePadding -> None, 
+                    ImagePadding -> Automatic, 
+                    BaselinePosition -> (Scaled[0.16666666666666669`] -> 
+                    Baseline)], "\" \"", #5}, "RowDefault"]}, {
+                    TemplateBox[{
+                    GraphicsBox[{{}, {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[0.38759999999999994`, 0.57, 0.]], {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[0.38759999999999994`, 0.57, 0.]], 
+                    PointBox[
+                    NCache[{
+                    Scaled[{
+                    Rational[1, 2], 
+                    Rational[1, 2]}]}, {
+                    Scaled[{0.5, 0.5}]}]]}}}, AspectRatio -> Full, 
+                    ImageSize -> {12, 12}, PlotRangePadding -> None, 
+                    ImagePadding -> Automatic, 
+                    BaselinePosition -> (Scaled[0.16666666666666669`] -> 
+                    Baseline)], "\" \"", #3}, "RowDefault"], 
+                    TemplateBox[{
+                    GraphicsBox[{{}, {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[0.78, 0.64, 0.98]], {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[0.78, 0.64, 0.98]], 
+                    PointBox[
+                    NCache[{
+                    Scaled[{
+                    Rational[1, 2], 
+                    Rational[1, 2]}]}, {
+                    Scaled[{0.5, 0.5}]}]]}}}, AspectRatio -> Full, 
+                    ImageSize -> {12, 12}, PlotRangePadding -> None, 
+                    ImagePadding -> Automatic, 
+                    BaselinePosition -> (Scaled[0.16666666666666669`] -> 
+                    Baseline)], "\" \"", #6}, "RowDefault"]}}, 
+                    GridBoxAlignment -> {
+                    "Columns" -> {{Left}}, "Rows" -> {{Baseline}}}, 
+                    AutoDelete -> False, 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Grid"], Alignment -> Left, AppearanceElements -> None, 
+                    ImageMargins -> {{2, 2}, {2, 2}}, ImageSizeAction -> 
+                    "ResizeToFit"], LineIndent -> 0, StripOnInput -> False], {
+                    FontFamily -> "Arial"}, Background -> Automatic, 
+                    StripOnInput -> False], TraditionalForm]& ), 
+                 InterpretationFunction :> (RowBox[{"PointLegend", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Directive", "[", 
+                    InterpretationBox[
+                    ButtonBox[
+                    TooltipBox[
+                    GraphicsBox[{{
+                    GrayLevel[0], 
+                    RectangleBox[{0, 0}]}, {
+                    GrayLevel[0], 
+                    RectangleBox[{1, -1}]}, {
+                    Hue[0.61, 0.75, 1], 
+                    RectangleBox[{0, -1}, {2, 1}]}}, AspectRatio -> 1, Frame -> 
+                    True, FrameStyle -> 
+                    Hue[0.61, 0.7499999999999999, 0.6666666666666667], 
+                    FrameTicks -> None, PlotRangePadding -> None, ImageSize -> 
+                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                    "Hue[0.61, 0.75, 1]"], Appearance -> None, 
+                    BaseStyle -> {}, BaselinePosition -> Baseline, 
+                    DefaultBaseStyle -> {}, ButtonFunction :> 
+                    With[{Typeset`box$ = EvaluationBox[]}, 
+                    If[
+                    Not[
+                    AbsoluteCurrentValue["Deployed"]], 
+                    SelectionMove[Typeset`box$, All, Expression]; 
+                    FrontEnd`Private`$ColorSelectorInitialAlpha = 1; 
+                    FrontEnd`Private`$ColorSelectorInitialColor = 
+                    Hue[0.61, 0.75, 1]; 
+                    FrontEnd`Private`$ColorSelectorUseMakeBoxes = True; 
+                    MathLink`CallFrontEnd[
+                    FrontEnd`AttachCell[Typeset`box$, 
+                    FrontEndResource["HueColorValueSelector"], {
+                    0, {Left, Bottom}}, {Left, Top}, 
+                    "ClosingActions" -> {
+                    "SelectionDeparture", "ParentChanged", 
+                    "EvaluatorQuit"}]]]], BaseStyle -> Inherited, Evaluator -> 
+                    Automatic, Method -> "Preemptive"], 
+                    Hue[0.61, 0.75, 1], Editable -> False, Selectable -> 
+                    False], "]"}], ",", 
+                    RowBox[{"Directive", "[", 
+                    InterpretationBox[
+                    ButtonBox[
+                    TooltipBox[
+                    GraphicsBox[{{
+                    GrayLevel[0], 
+                    RectangleBox[{0, 0}]}, {
+                    GrayLevel[0], 
+                    RectangleBox[{1, -1}]}, {
+                    RGBColor[0.29, 0.29, 0.83], 
+                    RectangleBox[{0, -1}, {2, 1}]}}, AspectRatio -> 1, Frame -> 
+                    True, FrameStyle -> 
+                    RGBColor[0.19333333333333333`, 0.19333333333333333`, 
+                    0.5533333333333333], FrameTicks -> None, PlotRangePadding -> 
+                    None, ImageSize -> 
+                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                    "RGBColor[0.29, 0.29, 0.83]"], Appearance -> None, 
+                    BaseStyle -> {}, BaselinePosition -> Baseline, 
+                    DefaultBaseStyle -> {}, ButtonFunction :> 
+                    With[{Typeset`box$ = EvaluationBox[]}, 
+                    If[
+                    Not[
+                    AbsoluteCurrentValue["Deployed"]], 
+                    SelectionMove[Typeset`box$, All, Expression]; 
+                    FrontEnd`Private`$ColorSelectorInitialAlpha = 1; 
+                    FrontEnd`Private`$ColorSelectorInitialColor = 
+                    RGBColor[0.29, 0.29, 0.83]; 
+                    FrontEnd`Private`$ColorSelectorUseMakeBoxes = True; 
+                    MathLink`CallFrontEnd[
+                    FrontEnd`AttachCell[Typeset`box$, 
+                    FrontEndResource["RGBColorValueSelector"], {
+                    0, {Left, Bottom}}, {Left, Top}, 
+                    "ClosingActions" -> {
+                    "SelectionDeparture", "ParentChanged", 
+                    "EvaluatorQuit"}]]]], BaseStyle -> Inherited, Evaluator -> 
+                    Automatic, Method -> "Preemptive"], 
+                    RGBColor[0.29, 0.29, 0.83], Editable -> False, Selectable -> 
+                    False], "]"}], ",", 
+                    RowBox[{"Directive", "[", 
+                    InterpretationBox[
+                    ButtonBox[
+                    TooltipBox[
+                    GraphicsBox[{{
+                    GrayLevel[0], 
+                    RectangleBox[{0, 0}]}, {
+                    GrayLevel[0], 
+                    RectangleBox[{1, -1}]}, {
+                    RGBColor[0.38759999999999994`, 0.57, 0.], 
+                    RectangleBox[{0, -1}, {2, 1}]}}, AspectRatio -> 1, Frame -> 
+                    True, FrameStyle -> 
+                    RGBColor[0.25839999999999996`, 0.38, 0.], FrameTicks -> 
+                    None, PlotRangePadding -> None, ImageSize -> 
+                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                    "RGBColor[0.38759999999999994, 0.57, 0.]"], Appearance -> 
+                    None, BaseStyle -> {}, BaselinePosition -> Baseline, 
+                    DefaultBaseStyle -> {}, ButtonFunction :> 
+                    With[{Typeset`box$ = EvaluationBox[]}, 
+                    If[
+                    Not[
+                    AbsoluteCurrentValue["Deployed"]], 
+                    SelectionMove[Typeset`box$, All, Expression]; 
+                    FrontEnd`Private`$ColorSelectorInitialAlpha = 1; 
+                    FrontEnd`Private`$ColorSelectorInitialColor = 
+                    RGBColor[0.38759999999999994`, 0.57, 0.]; 
+                    FrontEnd`Private`$ColorSelectorUseMakeBoxes = True; 
+                    MathLink`CallFrontEnd[
+                    FrontEnd`AttachCell[Typeset`box$, 
+                    FrontEndResource["RGBColorValueSelector"], {
+                    0, {Left, Bottom}}, {Left, Top}, 
+                    "ClosingActions" -> {
+                    "SelectionDeparture", "ParentChanged", 
+                    "EvaluatorQuit"}]]]], BaseStyle -> Inherited, Evaluator -> 
+                    Automatic, Method -> "Preemptive"], 
+                    RGBColor[0.38759999999999994`, 0.57, 0.], Editable -> 
+                    False, Selectable -> False], "]"}], ",", 
+                    RowBox[{"Directive", "[", 
+                    InterpretationBox[
+                    ButtonBox[
+                    TooltipBox[
+                    GraphicsBox[{{
+                    GrayLevel[0], 
+                    RectangleBox[{0, 0}]}, {
+                    GrayLevel[0], 
+                    RectangleBox[{1, -1}]}, {
+                    RGBColor[1., 0.4, 0.], 
+                    RectangleBox[{0, -1}, {2, 1}]}}, AspectRatio -> 1, Frame -> 
+                    True, FrameStyle -> 
+                    RGBColor[0.6666666666666667, 0.2666666666666667, 0.], 
+                    FrameTicks -> None, PlotRangePadding -> None, ImageSize -> 
+                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                    "RGBColor[1., 0.4, 0.]"], Appearance -> None, 
+                    BaseStyle -> {}, BaselinePosition -> Baseline, 
+                    DefaultBaseStyle -> {}, ButtonFunction :> 
+                    With[{Typeset`box$ = EvaluationBox[]}, 
+                    If[
+                    Not[
+                    AbsoluteCurrentValue["Deployed"]], 
+                    SelectionMove[Typeset`box$, All, Expression]; 
+                    FrontEnd`Private`$ColorSelectorInitialAlpha = 1; 
+                    FrontEnd`Private`$ColorSelectorInitialColor = 
+                    RGBColor[1., 0.4, 0.]; 
+                    FrontEnd`Private`$ColorSelectorUseMakeBoxes = True; 
+                    MathLink`CallFrontEnd[
+                    FrontEnd`AttachCell[Typeset`box$, 
+                    FrontEndResource["RGBColorValueSelector"], {
+                    0, {Left, Bottom}}, {Left, Top}, 
+                    "ClosingActions" -> {
+                    "SelectionDeparture", "ParentChanged", 
+                    "EvaluatorQuit"}]]]], BaseStyle -> Inherited, Evaluator -> 
+                    Automatic, Method -> "Preemptive"], 
+                    RGBColor[1., 0.4, 0.], Editable -> False, Selectable -> 
+                    False], "]"}], ",", 
+                    RowBox[{"Directive", "[", 
+                    InterpretationBox[
+                    ButtonBox[
+                    TooltipBox[
+                    GraphicsBox[{{
+                    GrayLevel[0], 
+                    RectangleBox[{0, 0}]}, {
+                    GrayLevel[0], 
+                    RectangleBox[{1, -1}]}, {
+                    GrayLevel[0.35], 
+                    RectangleBox[{0, -1}, {2, 1}]}}, AspectRatio -> 1, Frame -> 
+                    True, FrameStyle -> GrayLevel[0.23333333333333334`], 
+                    FrameTicks -> None, PlotRangePadding -> None, ImageSize -> 
+                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                    "GrayLevel[0.35]"], Appearance -> None, BaseStyle -> {}, 
+                    BaselinePosition -> Baseline, DefaultBaseStyle -> {}, 
+                    ButtonFunction :> With[{Typeset`box$ = EvaluationBox[]}, 
+                    If[
+                    Not[
+                    AbsoluteCurrentValue["Deployed"]], 
+                    SelectionMove[Typeset`box$, All, Expression]; 
+                    FrontEnd`Private`$ColorSelectorInitialAlpha = 1; 
+                    FrontEnd`Private`$ColorSelectorInitialColor = 
+                    GrayLevel[0.35]; 
+                    FrontEnd`Private`$ColorSelectorUseMakeBoxes = True; 
+                    MathLink`CallFrontEnd[
+                    FrontEnd`AttachCell[Typeset`box$, 
+                    FrontEndResource["GrayLevelColorValueSelector"], {
+                    0, {Left, Bottom}}, {Left, Top}, 
+                    "ClosingActions" -> {
+                    "SelectionDeparture", "ParentChanged", 
+                    "EvaluatorQuit"}]]]], BaseStyle -> Inherited, Evaluator -> 
+                    Automatic, Method -> "Preemptive"], 
+                    GrayLevel[0.35], Editable -> False, Selectable -> False], 
+                    "]"}], ",", 
+                    RowBox[{"Directive", "[", 
+                    InterpretationBox[
+                    ButtonBox[
+                    TooltipBox[
+                    GraphicsBox[{{
+                    GrayLevel[0], 
+                    RectangleBox[{0, 0}]}, {
+                    GrayLevel[0], 
+                    RectangleBox[{1, -1}]}, {
+                    RGBColor[0.78, 0.64, 0.98], 
+                    RectangleBox[{0, -1}, {2, 1}]}}, AspectRatio -> 1, Frame -> 
+                    True, FrameStyle -> 
+                    RGBColor[0.52, 0.4266666666666667, 0.6533333333333333], 
+                    FrameTicks -> None, PlotRangePadding -> None, ImageSize -> 
+                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                    "RGBColor[0.78, 0.64, 0.98]"], Appearance -> None, 
+                    BaseStyle -> {}, BaselinePosition -> Baseline, 
+                    DefaultBaseStyle -> {}, ButtonFunction :> 
+                    With[{Typeset`box$ = EvaluationBox[]}, 
+                    If[
+                    Not[
+                    AbsoluteCurrentValue["Deployed"]], 
+                    SelectionMove[Typeset`box$, All, Expression]; 
+                    FrontEnd`Private`$ColorSelectorInitialAlpha = 1; 
+                    FrontEnd`Private`$ColorSelectorInitialColor = 
+                    RGBColor[0.78, 0.64, 0.98]; 
+                    FrontEnd`Private`$ColorSelectorUseMakeBoxes = True; 
+                    MathLink`CallFrontEnd[
+                    FrontEnd`AttachCell[Typeset`box$, 
+                    FrontEndResource["RGBColorValueSelector"], {
+                    0, {Left, Bottom}}, {Left, Top}, 
+                    "ClosingActions" -> {
+                    "SelectionDeparture", "ParentChanged", 
+                    "EvaluatorQuit"}]]]], BaseStyle -> Inherited, Evaluator -> 
+                    Automatic, Method -> "Preemptive"], 
+                    RGBColor[0.78, 0.64, 0.98], Editable -> False, Selectable -> 
+                    False], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2, ",", #3, ",", #4, ",", #5, ",", #6}], 
+                    "}"}], ",", 
+                    RowBox[{"LegendMarkerSize", "\[Rule]", "12"}], ",", 
+                    RowBox[{"LegendMargins", "\[Rule]", "2"}], ",", 
+                    
+                    RowBox[{
+                    "LegendLayout", "\[Rule]", 
+                    "GeneralUtilities`Graphics`PackagePrivate`legendTable"}]}]\
+, "]"}]& ), Editable -> True], TraditionalForm]},
+              "Legended",
+              DisplayFunction->(GridBox[{{
+                  TagBox[
+                   ItemBox[
+                    PaneBox[
+                    TagBox[#, "SkipImageSizeLevel"], 
+                    Alignment -> {Center, Baseline}, BaselinePosition -> 
+                    Baseline], DefaultBaseStyle -> "Labeled"], 
+                   "SkipImageSizeLevel"]}, {
+                  ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+                GridBoxAlignment -> {
+                 "Columns" -> {{Center}}, "Rows" -> {{Center}}}, AutoDelete -> 
+                False, GridBoxItemSize -> Automatic, 
+                BaselinePosition -> {1, 1}]& ),
+              Editable->True,
+              InterpretationFunction->(RowBox[{"Legended", "[", 
+                 RowBox[{#, ",", 
+                   RowBox[{"Placed", "[", 
+                    RowBox[{#2, ",", "Below"}], "]"}]}], "]"}]& )]},
+            {
+             DynamicBox[ToBoxes[
+               If[
+                IntegerQ[NeuralNetworks`NetGraph`PackagePrivate`selection$$], 
+                Item[
+                 NeuralNetworks`NetGraph`PackagePrivate`vportInfo[
+                  Part[
+                  NeuralNetworks`NetGraph`PackagePrivate`vports$$, 
+                   NeuralNetworks`NetGraph`PackagePrivate`selection$$], 
+                  NeuralNetworks`NetGraph`PackagePrivate`inputs$$, 
+                  NeuralNetworks`NetGraph`PackagePrivate`outputs$$, 
+                  NeuralNetworks`NetGraph`PackagePrivate`vertices$$], 
+                 Alignment -> Center], 
+                Item["", ItemSize -> {0, 0}]], StandardForm],
+              ImageSizeCache->{0., {0., 6.}},
+              
+              TrackedSymbols:>{
+               NeuralNetworks`NetGraph`PackagePrivate`selection$$}]}
+           },
+           AutoDelete->False,
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+          "Grid"],
+         DynamicModuleValues:>{},
+         Initialization:>{NetGraph}],
+        Deploy,
+        DefaultBaseStyle->"Deploy"],
+       BaselinePosition->(Top -> Scaled[3])], "]"}]}],
+    False],
+   Deploy],
+  LineBreakWithin->False]], "Output",
+ CellChangeTimes->{3.6814711592283487`*^9, 3.681471204163968*^9, 
+  3.6814712487915096`*^9}]
+}, Open  ]]
+},
+WindowSize->{940, 699},
+WindowMargins->{{319, Automatic}, {102, Automatic}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (August 22, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 98, 1, 30, "Input"],
+Cell[659, 23, 919, 21, 50, "Input"],
+Cell[CellGroupData[{
+Cell[1603, 48, 248, 5, 30, "Input"],
+Cell[1854, 55, 310, 6, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2201, 66, 351, 9, 30, "Input"],
+Cell[2555, 77, 332, 7, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2924, 89, 405, 11, 30, "Input"],
+Cell[3332, 102, 44584, 909, 169, "Output"]
+}, Open  ]]
+}
+]
+*)
+

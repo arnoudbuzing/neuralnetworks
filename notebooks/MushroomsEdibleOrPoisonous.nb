@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    365805,       7595]
-NotebookOptionsPosition[    362564,       7481]
-NotebookOutlinePosition[    362938,       7497]
-CellTagsIndexPosition[    362895,       7494]
+NotebookDataLength[    369409,       7687]
+NotebookOptionsPosition[    365814,       7565]
+NotebookOutlinePosition[    366159,       7580]
+CellTagsIndexPosition[    366116,       7577]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -5317,9 +5317,9 @@ Cell[BoxData[
     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{
-      Hold[$CellContext`a$$], 1, 22, 1}}, Typeset`size$$ = {
-    391., {125., 134.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`a$602577$$ = 0}, 
+      Hold[$CellContext`a$$], 1, 22, 1}}, Typeset`size$$ = {246., {79., 86.}},
+     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`a$602577$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`a$$ = 1}, 
       "ControllerVariables" :> {
@@ -5334,7 +5334,7 @@ Cell[BoxData[
          Part[$CellContext`allLabels, $CellContext`a$$]], Frame -> All], 
       "Specifications" :> {{$CellContext`a$$, 1, 22, 1}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{463., {208., 217.}},
+     ImageSizeCache->{297., {126., 133.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -5346,7 +5346,90 @@ Cell[BoxData[
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
  CellChangeTimes->{3.6806317009666185`*^9, 3.6806317379812174`*^9, 
-  3.680631837528177*^9}]
+  3.680631837528177*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partd",
+   "\"Part specification \\!\\(\\*RowBox[{\\\"allLabels\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"5\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"",2,49,1,19927643409631156714,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6808901368873005`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partd",
+   "\"Part specification \\!\\(\\*RowBox[{\\\"encoders\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"5\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"",2,49,2,19927643409631156714,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.680890136912808*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partd",
+   "\"Part specification \\!\\(\\*RowBox[{\\\"encoders\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"5\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"",2,49,3,19927643409631156714,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.680890136952325*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Part\\\", \\\"::\\\", \
+\\\"partd\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,49,4,19927643409631156714,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.680890136975848*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","pkspec1",
+   "\"The expression \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"5\\\", \
+\\\",\\\", RowBox[{RowBox[{\\\"encoders\\\", \\\"\[LeftDoubleBracket]\\\", \\\
+\"5\\\", \\\"\[RightDoubleBracket]\\\"}], \\\"[\\\", \\\"5\\\", \
+\\\"]\\\"}]}], \\\"}\\\"}]\\) cannot be used as a part specification.\"",2,49,
+   5,19927643409631156714,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.680890137001873*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partd",
+   "\"Part specification \\!\\(\\*RowBox[{\\\"encoders\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"5\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"",2,52,6,19927643409631156714,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.680890246329713*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partd",
+   "\"Part specification \\!\\(\\*RowBox[{\\\"encoders\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"5\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"",2,52,7,19927643409631156714,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6808902463512344`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partd",
+   "\"Part specification \\!\\(\\*RowBox[{\\\"encoders\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"5\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"",2,52,8,19927643409631156714,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6808902463717537`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Part\\\", \\\"::\\\", \
+\\\"partd\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,52,9,19927643409631156714,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6808902463977795`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -6969,10 +7052,10 @@ SlxO2MD4AL/bni8=
                     RectangleBox[{0, -1}, {2, 1}]}}, AspectRatio -> 1, Frame -> 
                     True, FrameStyle -> RGBColor[0.6000000000000001, 0., 0.], 
                     FrameTicks -> None, PlotRangePadding -> None, ImageSize -> 
-                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}]], 
-                    "RGBColor[0.9, 0., 0.]"], Appearance -> None, 
-                    BaseStyle -> {}, BaselinePosition -> Baseline, 
+                    Dynamic[{Automatic, 
+                    1.35 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}]], "RGBColor[0.9, 0., 0.]"], Appearance -> 
+                    None, BaseStyle -> {}, BaselinePosition -> Baseline, 
                     DefaultBaseStyle -> {}, ButtonFunction :> 
                     With[{Typeset`box$ = EvaluationBox[]}, 
                     If[
@@ -7006,11 +7089,12 @@ SlxO2MD4AL/bni8=
                     RectangleBox[{0, -1}, {2, 1}]}}, AspectRatio -> 1, Frame -> 
                     True, FrameStyle -> GrayLevel[0.23333333333333334`], 
                     FrameTicks -> None, PlotRangePadding -> None, ImageSize -> 
-                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}]], 
-                    "GrayLevel[0.35]"], Appearance -> None, BaseStyle -> {}, 
-                    BaselinePosition -> Baseline, DefaultBaseStyle -> {}, 
-                    ButtonFunction :> With[{Typeset`box$ = EvaluationBox[]}, 
+                    Dynamic[{Automatic, 
+                    1.35 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}]], "GrayLevel[0.35]"], Appearance -> 
+                    None, BaseStyle -> {}, BaselinePosition -> Baseline, 
+                    DefaultBaseStyle -> {}, ButtonFunction :> 
+                    With[{Typeset`box$ = EvaluationBox[]}, 
                     If[
                     Not[
                     AbsoluteCurrentValue["Deployed"]], 
@@ -7044,11 +7128,11 @@ SlxO2MD4AL/bni8=
                     RGBColor[0.19333333333333333`, 0.19333333333333333`, 
                     0.5533333333333333], FrameTicks -> None, PlotRangePadding -> 
                     None, ImageSize -> 
-                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}]], 
-                    "RGBColor[0.29, 0.29, 0.83]"], Appearance -> None, 
-                    BaseStyle -> {}, BaselinePosition -> Baseline, 
-                    DefaultBaseStyle -> {}, ButtonFunction :> 
+                    Dynamic[{Automatic, 
+                    1.35 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}]], "RGBColor[0.29, 0.29, 0.83]"], 
+                    Appearance -> None, BaseStyle -> {}, BaselinePosition -> 
+                    Baseline, DefaultBaseStyle -> {}, ButtonFunction :> 
                     With[{Typeset`box$ = EvaluationBox[]}, 
                     If[
                     Not[
@@ -7082,11 +7166,11 @@ SlxO2MD4AL/bni8=
                     True, FrameStyle -> 
                     RGBColor[0.52, 0.4266666666666667, 0.6533333333333333], 
                     FrameTicks -> None, PlotRangePadding -> None, ImageSize -> 
-                    Dynamic[{Automatic, 1.35 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}]], 
-                    "RGBColor[0.78, 0.64, 0.98]"], Appearance -> None, 
-                    BaseStyle -> {}, BaselinePosition -> Baseline, 
-                    DefaultBaseStyle -> {}, ButtonFunction :> 
+                    Dynamic[{Automatic, 
+                    1.35 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}]], "RGBColor[0.78, 0.64, 0.98]"], 
+                    Appearance -> None, BaseStyle -> {}, BaselinePosition -> 
+                    Baseline, DefaultBaseStyle -> {}, ButtonFunction :> 
                     With[{Typeset`box$ = EvaluationBox[]}, 
                     If[
                     Not[
@@ -7148,7 +7232,7 @@ SlxO2MD4AL/bni8=
                   NeuralNetworks`NetGraph`PackagePrivate`vertices$$], 
                  Alignment -> Center], 
                 Item["", ItemSize -> {0, 0}]], StandardForm],
-              ImageSizeCache->{296., {77., 87.}},
+              ImageSizeCache->{200., {53., 58.}},
               
               TrackedSymbols:>{
                NeuralNetworks`NetGraph`PackagePrivate`selection$$}]}
@@ -7479,9 +7563,8 @@ Cell[BoxData[
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1920, 1037},
-WindowMargins->{{-8, Automatic}, {Automatic, -8}},
-Magnification:>1.5 Inherited,
+WindowSize->{958, 1028},
+WindowMargins->{{Automatic, -1927}, {Automatic, 0}},
 FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
 StyleDefinitions->"Default.nb"
 ]
@@ -7497,102 +7580,111 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 127, 1, 150, "Title"],
+Cell[580, 22, 127, 1, 101, "Title"],
 Cell[CellGroupData[{
-Cell[732, 27, 173, 3, 72, "Subsection"],
+Cell[732, 27, 173, 3, 49, "Subsection"],
 Cell[CellGroupData[{
-Cell[930, 34, 187, 3, 45, "Input"],
-Cell[1120, 39, 674, 17, 45, "Output"]
+Cell[930, 34, 187, 3, 30, "Input"],
+Cell[1120, 39, 674, 17, 30, "Output"]
 }, Open  ]],
-Cell[1809, 59, 309, 7, 45, "Input"],
+Cell[1809, 59, 309, 7, 30, "Input"],
 Cell[CellGroupData[{
-Cell[2143, 70, 301, 8, 45, "Input"],
-Cell[2447, 80, 3420, 48, 308, "Output"]
+Cell[2143, 70, 301, 8, 30, "Input"],
+Cell[2447, 80, 3420, 48, 200, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5904, 133, 95, 1, 58, "Subsubsection"],
-Cell[6002, 136, 2292, 38, 684, "Input"],
-Cell[8297, 176, 1237, 31, 163, "Input"],
+Cell[5904, 133, 95, 1, 39, "Subsubsection"],
+Cell[6002, 136, 2292, 38, 525, "Input"],
+Cell[8297, 176, 1237, 31, 108, "Input"],
 Cell[CellGroupData[{
-Cell[9559, 211, 133, 2, 45, "Input"],
-Cell[9695, 215, 200, 3, 45, "Output"]
+Cell[9559, 211, 133, 2, 30, "Input"],
+Cell[9695, 215, 200, 3, 30, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9944, 224, 97, 1, 58, "Subsubsection"],
+Cell[9944, 224, 97, 1, 39, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[10066, 229, 133, 2, 45, "Input"],
-Cell[10202, 233, 97, 1, 45, "Output"]
+Cell[10066, 229, 133, 2, 30, "Input"],
+Cell[10202, 233, 97, 1, 30, "Output"]
 }, Open  ]],
-Cell[10314, 237, 196, 4, 45, "Input"],
+Cell[10314, 237, 196, 4, 30, "Input"],
 Cell[CellGroupData[{
-Cell[10535, 245, 145, 2, 45, "Input"],
-Cell[10683, 249, 71, 1, 45, "Output"]
+Cell[10535, 245, 145, 2, 30, "Input"],
+Cell[10683, 249, 71, 1, 30, "Output"]
 }, Open  ]],
-Cell[10769, 253, 415, 11, 45, "Input"],
-Cell[11187, 266, 202, 4, 45, "Input"],
+Cell[10769, 253, 415, 11, 30, "Input"],
+Cell[11187, 266, 202, 4, 30, "Input"],
 Cell[CellGroupData[{
-Cell[11414, 274, 151, 3, 45, "Input"],
-Cell[11568, 279, 529, 8, 45, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[12134, 292, 222, 4, 45, "Input"],
-Cell[12359, 298, 3188, 51, 220, "Output"]
+Cell[11414, 274, 151, 3, 30, "Input"],
+Cell[11568, 279, 529, 8, 30, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[15584, 354, 140, 2, 45, "Input"],
-Cell[15727, 358, 73, 1, 45, "Output"]
-}, Open  ]],
-Cell[15815, 362, 135, 2, 45, "Input"],
-Cell[CellGroupData[{
-Cell[15975, 368, 698, 16, 75, "Input"],
-Cell[16676, 386, 268, 5, 45, "Output"]
+Cell[12134, 292, 222, 4, 30, "Input"],
+Cell[12359, 298, 3188, 51, 202, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[16981, 396, 150, 3, 45, "Input"],
-Cell[17134, 401, 692, 11, 75, "Output"]
+Cell[15584, 354, 140, 2, 30, "Input"],
+Cell[15727, 358, 73, 1, 30, "Output"]
 }, Open  ]],
-Cell[17841, 415, 958, 18, 104, "Input"],
+Cell[15815, 362, 135, 2, 30, "Input"],
 Cell[CellGroupData[{
-Cell[18824, 437, 132, 2, 45, "Input"],
-Cell[18959, 441, 97, 1, 45, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[19093, 447, 450, 10, 133, "Input"],
-Cell[19546, 459, 237684, 4718, 839, "Output"]
+Cell[15975, 368, 698, 16, 50, "Input"],
+Cell[16676, 386, 268, 5, 30, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[257267, 5182, 305, 8, 45, "Input"],
-Cell[257575, 5192, 3794, 79, 220, "Output"]
+Cell[16981, 396, 150, 3, 30, "Input"],
+Cell[17134, 401, 692, 11, 50, "Output"]
 }, Open  ]],
-Cell[261384, 5274, 555, 12, 133, "Input"],
+Cell[17841, 415, 958, 18, 88, "Input"],
 Cell[CellGroupData[{
-Cell[261964, 5290, 749, 20, 104, "Input"],
-Cell[262716, 5312, 1746, 36, 449, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[264499, 5353, 240, 5, 45, "Input"],
-Cell[264742, 5360, 1535, 25, 133, "Output"]
-}, Open  ]],
-Cell[266292, 5388, 316, 9, 45, "Input"],
-Cell[CellGroupData[{
-Cell[266633, 5401, 1679, 34, 394, "Input"],
-Cell[268315, 5437, 82978, 1733, 884, "Output"]
-}, Open  ]],
-Cell[351308, 7173, 210, 5, 45, "Input"],
-Cell[351521, 7180, 520, 16, 75, "Input"],
-Cell[CellGroupData[{
-Cell[352066, 7200, 208, 4, 45, "Input"],
-Cell[352277, 7206, 690, 11, 75, "Output"]
+Cell[18824, 437, 132, 2, 30, "Input"],
+Cell[18959, 441, 97, 1, 30, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[353004, 7222, 133, 2, 45, "Input"],
-Cell[353140, 7226, 70, 1, 45, "Output"]
+Cell[19093, 447, 450, 10, 88, "Input"],
+Cell[19546, 459, 237684, 4718, 558, "Output"]
 }, Open  ]],
-Cell[353225, 7230, 222, 5, 45, "Input"],
 Cell[CellGroupData[{
-Cell[353472, 7239, 149, 2, 45, "Input"],
-Cell[353624, 7243, 8888, 232, 476, "Output"]
+Cell[257267, 5182, 305, 8, 30, "Input"],
+Cell[257575, 5192, 3794, 79, 202, "Output"]
+}, Open  ]],
+Cell[261384, 5274, 555, 12, 88, "Input"],
+Cell[CellGroupData[{
+Cell[261964, 5290, 749, 20, 69, "Input"],
+Cell[262716, 5312, 1744, 36, 276, "Output"],
+Cell[264463, 5350, 345, 7, 21, "Message"],
+Cell[264811, 5359, 342, 7, 21, "Message"],
+Cell[265156, 5368, 342, 7, 21, "Message"],
+Cell[265501, 5377, 337, 7, 21, "Message"],
+Cell[265841, 5386, 461, 9, 21, "Message"],
+Cell[266305, 5397, 342, 7, 21, "Message"],
+Cell[266650, 5406, 344, 7, 21, "Message"],
+Cell[266997, 5415, 344, 7, 21, "Message"],
+Cell[267344, 5424, 339, 7, 21, "Message"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[267720, 5436, 240, 5, 30, "Input"],
+Cell[267963, 5443, 1535, 25, 107, "Output"]
+}, Open  ]],
+Cell[269513, 5471, 316, 9, 30, "Input"],
+Cell[CellGroupData[{
+Cell[269854, 5484, 1679, 34, 259, "Input"],
+Cell[271536, 5520, 83007, 1734, 595, "Output"]
+}, Open  ]],
+Cell[354558, 7257, 210, 5, 30, "Input"],
+Cell[354771, 7264, 520, 16, 50, "Input"],
+Cell[CellGroupData[{
+Cell[355316, 7284, 208, 4, 30, "Input"],
+Cell[355527, 7290, 690, 11, 50, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[356254, 7306, 133, 2, 30, "Input"],
+Cell[356390, 7310, 70, 1, 30, "Output"]
+}, Open  ]],
+Cell[356475, 7314, 222, 5, 30, "Input"],
+Cell[CellGroupData[{
+Cell[356722, 7323, 149, 2, 30, "Input"],
+Cell[356874, 7327, 8888, 232, 319, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
