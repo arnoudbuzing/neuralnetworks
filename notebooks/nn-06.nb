@@ -1,0 +1,349 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11104,        341]
+NotebookOptionsPosition[      9541,        292]
+NotebookOutlinePosition[      9922,        308]
+CellTagsIndexPosition[      9879,        305]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Neural Network Explorations", "Title",
+ CellChangeTimes->{{3.682770872965294*^9, 3.6827708801013536`*^9}}],
+
+Cell[BoxData["Plot"], "Input",
+ CellChangeTimes->{{3.682771489310976*^9, 3.682771492263141*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"PDF", "[", 
+    RowBox[{
+     RowBox[{"NormalDistribution", "[", 
+      RowBox[{"0", ",", "1"}], "]"}], ",", "x"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", 
+     RowBox[{"-", "4"}], ",", "4"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6827708835938993`*^9, 3.6827708986939955`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Histogram", "[", 
+  RowBox[{
+   RowBox[{"RandomVariate", "[", 
+    RowBox[{
+     RowBox[{"NormalDistribution", "[", 
+      RowBox[{"0", ",", "1"}], "]"}], ",", "40000"}], "]"}], ",", "50"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6827709060622196`*^9, 3.6827709193500957`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sample", "[", 
+   RowBox[{"center_", ",", "num_"}], "]"}], ":=", 
+  RowBox[{"RandomVariate", "[", 
+   RowBox[{
+    RowBox[{"MultinormalDistribution", "[", 
+     RowBox[{"center", ",", 
+      RowBox[{"IdentityMatrix", "[", "2", "]"}]}], "]"}], ",", "num"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6827709238561296`*^9, 3.6827709427898498`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"sample", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1"}], "}"}], ",", "3"}], "]"}]], "Input",
+ CellChangeTimes->{{3.682770944322789*^9, 3.6827709491502805`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"clusters", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"sample", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "2"}], ",", 
+         RowBox[{"-", "2"}]}], "}"}], ",", "10000"}], "]"}], ",", 
+     RowBox[{"sample", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", "10000"}], "]"}], ",", 
+     RowBox[{"sample", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"2", ",", "2"}], "}"}], ",", "10000"}], "]"}], ",", 
+     RowBox[{"sample", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"2", ",", 
+         RowBox[{"-", "2"}]}], "}"}], ",", "10000"}], "]"}]}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.6827709510983267`*^9, 3.6827709890855565`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Graphics", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"AbsolutePointSize", "[", "0.5", "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"#1", ",", 
+          RowBox[{"Point", "[", "#2", "]"}]}], "}"}], "&"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"Red", ",", "White", ",", "Blue", ",", "Orange"}], "}"}], 
+         ",", "clusters"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", "}"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"Background", "\[Rule]", "Black"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"PlotRange", "\[Rule]", "10"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Axes", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.682770994433608*^9, 3.682771060430524*^9}}],
+
+Cell[BoxData[
+ RowBox[{"net", "=", 
+  RowBox[{"NetChain", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"400", ",", "Ramp", ",", "4", ",", 
+      RowBox[{"SoftmaxLayer", "[", "]"}]}], "}"}], ",", 
+    RowBox[{"\"\<Input\>\"", "\[Rule]", 
+     RowBox[{"{", "2", "}"}]}], ",", 
+    RowBox[{"\"\<Output\>\"", "\[Rule]", 
+     RowBox[{"NetDecoder", "[", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Class\>\"", ",", 
+        RowBox[{"{", 
+         RowBox[{"Red", ",", "White", ",", "Blue", ",", "Orange"}], "}"}]}], 
+       "}"}], "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.682771075978301*^9, 3.68277111618989*^9}}],
+
+Cell[BoxData[
+ RowBox[{"NetGraph", "[", "net", "]"}]], "Input",
+ CellChangeTimes->{{3.6827711228143234`*^9, 3.68277112483797*^9}}],
+
+Cell[BoxData[
+ RowBox[{"net", "=", 
+  RowBox[{"NetInitialize", "[", "net", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6827711376230726`*^9, 3.682771140774111*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"RandomSample", "[", "\[IndentingNewLine]", 
+    RowBox[{"Join", "@@", 
+     RowBox[{"MapThread", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Thread", "[", 
+         RowBox[{"#1", "\[Rule]", "#2"}], "]"}], "&"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"clusters", ",", 
+         RowBox[{"{", 
+          RowBox[{"Red", ",", "White", ",", "Blue", ",", "Orange"}], "}"}]}], 
+        "}"}]}], "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6827711446085844`*^9, 3.6827711766378174`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Take", "[", 
+   RowBox[{"data", ",", "20"}], "]"}], "//", "Column"}]], "Input",
+ CellChangeTimes->{{3.682771178935878*^9, 3.6827711829973435`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "data", "]"}]], "Input",
+ CellChangeTimes->{{3.682771187175959*^9, 3.682771188397899*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"training", "=", 
+   RowBox[{"Take", "[", 
+    RowBox[{"data", ",", "38000"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"validation", "=", 
+   RowBox[{"Take", "[", 
+    RowBox[{"data", ",", 
+     RowBox[{"-", "2000"}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.682771190473285*^9, 3.6827712057414646`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"result", "=", 
+  RowBox[{"NetTrain", "[", 
+   RowBox[{"net", ",", "training", ",", 
+    RowBox[{"MaxTrainingRounds", "\[Rule]", "10000"}], ",", 
+    RowBox[{"ValidationSet", "\[Rule]", "validation"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.682771208830728*^9, 3.6827712241181083`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"result", "[", 
+  RowBox[{"{", 
+   RowBox[{"0", ",", "0"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6827712515607758`*^9, 3.682771254582302*^9}}],
+
+Cell[BoxData[
+ RowBox[{"result", "[", 
+  RowBox[{"{", 
+   RowBox[{"10", ",", "10"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6827712563110285`*^9, 3.6827712593338065`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cm", "=", 
+  RowBox[{"ClassifierMeasurements", "[", 
+   RowBox[{"result", ",", "validation"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.682771262976307*^9, 3.6827712688303843`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cm", "[", "\"\<Accuracy\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.6827712705869503`*^9, 3.682771277277919*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cm", "[", "\"\<ConfusionMatrixPlot\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.6827712789559956`*^9, 3.682771284237941*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cm", "[", "\"\<ConfusionMatrixPlot\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.6827717919902678`*^9, 3.68277179972342*^9}}],
+
+Cell[BoxData[
+ RowBox[{"With", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"e", "=", "1"}], "}"}], ",", "e"}], "]"}]], "Input",
+ CellChangeTimes->{{3.682775511521097*^9, 3.682775516389904*^9}}],
+
+Cell[BoxData[
+ RowBox[{"With", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"e", "=", "1"}], "}"}], ",", "e"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6827754855517387`*^9, 3.682775494154133*^9}}],
+
+Cell[BoxData[
+ RowBox[{"With", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"e", "=", "1"}], "}"}], ",", "e"}], "]"}]], "Input",
+ CellChangeTimes->{{3.682775176049526*^9, 3.682775182528129*^9}}],
+
+Cell[BoxData[
+ RowBox[{"With", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"e", "=", "1"}], "}"}], ",", "e"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6827751450419464`*^9, 3.6827751479647017`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cm", "[", "\"\<kfdjshfkdj\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.682783068912427*^9, 3.682783072761754*^9}},
+ EmphasizeSyntaxErrors->True],
+
+Cell[BoxData[
+ RowBox[{"cm", "[", "\"\<ConfusionMatrixPlot\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.6827717728641806`*^9, 3.6827717790794106`*^9}, {
+  3.6827718274644117`*^9, 3.6827718473061395`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cm", "[", "\"\<ConfusionMatrixPlot\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.6827717341956987`*^9, 3.6827717408410997`*^9}, {
+  3.6827718489978848`*^9, 3.682771850264369*^9}, {3.6827751061875877`*^9, 
+  3.682775108147998*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cm", "[", "\"\<ConfusionMatrixPlot\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.682771292029463*^9, 3.682771300993891*^9}, {
+  3.6827718522638335`*^9, 3.6827718534109874`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cm", "[", "\"\<ConfusionMatrixPlot\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.682776369851677*^9, 3.682776375167091*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cm", "[", "\"\<ConfusionMatrixPlot\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.682776527784194*^9, 3.682776556301587*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cm", "[", "\"\<fdkjhfdksj\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.682783120554084*^9, 3.68278312317335*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Range", "[", "10000", "]"}]], "Input",
+ CellChangeTimes->{{3.682776511023464*^9, 3.682776513906002*^9}}]
+}, Open  ]]
+},
+WindowSize->{1000, 931},
+WindowMargins->{{341, Automatic}, {-161, Automatic}},
+Magnification:>1.5 Inherited,
+FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (September 12, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 112, 1, 150, "Title"],
+Cell[695, 25, 96, 1, 45, "Input"],
+Cell[794, 28, 361, 10, 45, "Input"],
+Cell[1158, 40, 304, 8, 45, "Input"],
+Cell[1465, 50, 384, 10, 45, "Input"],
+Cell[1852, 62, 199, 5, 45, "Input"],
+Cell[2054, 69, 812, 26, 45, "Input"],
+Cell[2869, 97, 893, 22, 220, "Input"],
+Cell[3765, 121, 620, 16, 75, "Input"],
+Cell[4388, 139, 130, 2, 45, "Input"],
+Cell[4521, 143, 161, 3, 45, "Input"],
+Cell[4685, 148, 620, 16, 133, "Input"],
+Cell[5308, 166, 182, 4, 45, "Input"],
+Cell[5493, 172, 128, 2, 45, "Input"],
+Cell[5624, 176, 369, 10, 75, "Input"],
+Cell[5996, 188, 313, 6, 75, "Input"],
+Cell[6312, 196, 174, 4, 45, "Input"],
+Cell[6489, 202, 178, 4, 45, "Input"],
+Cell[6670, 208, 205, 4, 45, "Input"],
+Cell[6878, 214, 138, 2, 45, "Input"],
+Cell[7019, 218, 149, 2, 45, "Input"],
+Cell[7171, 222, 148, 2, 45, "Input"],
+Cell[7322, 226, 195, 5, 45, "Input"],
+Cell[7520, 233, 197, 5, 45, "Input"],
+Cell[7720, 240, 195, 5, 45, "Input"],
+Cell[7918, 247, 199, 5, 45, "Input"],
+Cell[8120, 254, 168, 3, 45, "Input"],
+Cell[8291, 259, 204, 3, 45, "Input"],
+Cell[8498, 264, 253, 4, 45, "Input"],
+Cell[8754, 270, 200, 3, 45, "Input"],
+Cell[8957, 275, 147, 2, 45, "Input"],
+Cell[9107, 279, 147, 2, 45, "Input"],
+Cell[9257, 283, 137, 2, 45, "Input"],
+Cell[9397, 287, 128, 2, 45, "Input"]
+}, Open  ]]
+}
+]
+*)
+
