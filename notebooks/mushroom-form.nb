@@ -1,0 +1,104 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3239,         96]
+NotebookOptionsPosition[      2918,         80]
+NotebookOutlinePosition[      3268,         95]
+CellTagsIndexPosition[      3225,         92]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"CloudDeploy", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"FormFunction", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<x\>\"", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"\"\<a\>\"", ",", "\"\<b\>\"", ",", "\"\<c\>\""}], "}"}]}], 
+      "}"}], ",", 
+     RowBox[{"#x", "&"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AppearanceRules", "\[Rule]", 
+      RowBox[{"<|", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"\"\<Title\>\"", "\[Rule]", "\"\<Mushroom Identifier\>\""}], 
+        ",", "\[IndentingNewLine]", 
+        RowBox[{
+        "\"\<Description\>\"", "\[Rule]", 
+         "\"\<Fill out this form to identify if your mushroom is edible or \
+poisonous\>\""}]}], "|>"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"CloudObject", "[", "\"\<mushroom-identifier\>\"", "]"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.6828704990244913`*^9, 3.682870567837526*^9}, {
+  3.6828706929326496`*^9, 3.682870712533792*^9}, {3.6828707989804964`*^9, 
+  3.6828708178294387`*^9}, {3.6828708580211287`*^9, 3.6828708868708935`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"CloudObject", "[", 
+   TagBox[
+    ButtonBox[
+     PaneSelectorBox[{
+      False->"\<\"https://www.wolframcloud.com/objects/user-7053ce31-817f-\
+4643-aec1-eda27051bba6/mushroom-identifier\"\>", True->
+      StyleBox["\<\"https://www.wolframcloud.com/objects/user-7053ce31-817f-\
+4643-aec1-eda27051bba6/mushroom-identifier\"\>", "HyperlinkActive"]}, Dynamic[
+       CurrentValue["MouseOver"]],
+      BaseStyle->{"Hyperlink"},
+      FrameMargins->0,
+      ImageSize->Automatic],
+     BaseStyle->"Hyperlink",
+     ButtonData->{
+       URL[
+       "https://www.wolframcloud.com/objects/user-7053ce31-817f-4643-aec1-\
+eda27051bba6/mushroom-identifier"], None},
+     ButtonNote->
+      "https://www.wolframcloud.com/objects/user-7053ce31-817f-4643-aec1-\
+eda27051bba6/mushroom-identifier"],
+    Annotation[#, 
+     "https://www.wolframcloud.com/objects/user-7053ce31-817f-4643-aec1-\
+eda27051bba6/mushroom-identifier", "Hyperlink"]& ], "]"}],
+  CloudObject[
+  "https://www.wolframcloud.com/objects/user-7053ce31-817f-4643-aec1-\
+eda27051bba6/mushroom-identifier"],
+  SelectWithContents->True]], "Output",
+ CellChangeTimes->{3.68287081861255*^9, 3.682870888860509*^9}]
+}, Open  ]]
+},
+WindowSize->{1904, 997},
+WindowMargins->{{285, Automatic}, {Automatic, 253}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 12, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1113, 24, 145, "Input"],
+Cell[1696, 48, 1206, 29, 33, "Output"]
+}, Open  ]]
+}
+]
+*)
+
